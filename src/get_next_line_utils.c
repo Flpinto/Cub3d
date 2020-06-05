@@ -6,13 +6,13 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:14:34 by flpinto           #+#    #+#             */
-/*   Updated: 2020/05/30 15:28:10 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/06/05 11:29:24 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/get_next_line.h"
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlenz(const char *str)
 {
 	size_t count;
 
@@ -38,52 +38,23 @@ char	*ft_strcpy(char *dest, char *src)
 	return (dest);
 }
 
-char	*ft_strchr(const char *s, int c)
+char			*ft_join(char *s1, char *s2, size_t len)
 {
-	while (*s)
-	{
-		if (*s == c)
-			return ((char *)s);
-		s++;
-	}
-	if (c == '\0')
-		return ((char*)s);
-	return (NULL);
-}
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char			*string;
+	char			*str;
+	char			*tmp;
 	unsigned int	i;
+	unsigned int	j;
 
+	if (!(str = malloc(sizeof(char) * (ft_strlenz(s1) + len + 1))))
+		return (NULL);
+	tmp = str;
 	i = 0;
-	if (!s)
-		return (NULL);
-	if (start > ft_strlen(s))
-		len = 0;
-	if (!(string = (char *)malloc(len + 1)))
-		return (NULL);
-	string[len] = '\0';
-	while (i < len)
-	{
-		string[i] = s[start];
-		i++;
-		start++;
-	}
-	return (string);
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	unsigned char	*ptr;
-
-	if (count == 0 || size == 0)
-	{
-		count = 1;
-		size = 1;
-	}
-	if (!(ptr = (unsigned char *)malloc(sizeof(size) * count)))
-		return (NULL);
-	ft_memset(ptr, 0, count);
-	return ((void *)ptr);
+	j = 0;
+	while (s1[j])
+		str[i++] = s1[j++];
+	j = 0;
+	while (s2[j] && len > 0)
+		str[i++] = s2[j++];
+	str[i] = '\0';
+	return (str - (str - tmp));
 }
