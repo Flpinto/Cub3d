@@ -6,7 +6,7 @@
 #    By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 10:31:31 by flpinto           #+#    #+#              #
-#    Updated: 2020/06/04 13:01:27 by flpinto          ###   ########.fr        #
+#    Updated: 2020/06/06 13:05:17 by flpinto          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIBFT_SRC := $(wildcard libft/*.c)
 LIBFT_OBJ := $(patsubst libft/%.c, libft/%.o, $(LIBFT_SRC))
 
 COMP = gcc -Wall -Wextra -Werror
-INCLUDES = -Iincludes -Llibft
+INCLUDES = -Iincludes -Llibft -Lmlx -Imlx
 
 SRC := $(wildcard src/*.c)
 OBJ := $(patsubst src/%.c, obj/%.o, $(SRC))
@@ -35,6 +35,7 @@ $(BINARY): $(LIBFT) $(OBJ)
 $(LIBFT): $(LIBFT_OBJ)
 	@echo -e "$(GREEN)==> Making LIBFT$(RESET)"
 	ar rcs $(LIBFT) $(LIBFT_OBJ)
+
 
 libft/%.o: libft/%.c
 	$(COMP) -Iincludes -c $< -o $@

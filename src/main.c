@@ -6,47 +6,24 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:31:07 by flpinto           #+#    #+#             */
-/*   Updated: 2020/06/05 11:40:43 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/06/07 12:40:34 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
-int     main(int argc, char **argv)
+int     main(int argc, const char **argv)
 {
-    char    *lineadress[1024];
-    int     fd;
-    int     i;
-    int     j;
+    t_info *info;
 
-    j = 1;
     if (argc < 2 || argc > 3)
         return(0);
 
-    if (!(fd = open(argv[1], O_RDONLY)))
-	{
-		printf("\nError in open\n");
-		return (0);
-	}
-
-    while ((i = get_next_line(fd, &lineadress[j - 1])) > 0)
-    {
-        if (ft_strnstr(lineadress[j - 1], "R ", strlen(lineadress[j - 1]))) 
-            printf("okyy");
-        if (ft_strnstr(lineadress[j - 1], "SO", strlen(lineadress[j - 1]))) 
-            printf("okyy");
-        printf("%s\n", lineadress[j - 1]); 
-        j++;
-    }
-    printf("%s\n", lineadress[j - 1]);    
-    
-    close(fd);
-    if (i == -1)
-		printf ("\nError in Fonction - Returned -1\n");
-        
-    while (--j > 0)
-		free(lineadress[j - 1]);
- 
-    
+    info = ft_parse_info((char *)argv[1]);
+   
+    printf("Res X is %d\n", info->res_x);
+    printf("Res Y is %d\n", info->res_y);
+    printf("Color floor is %d,%d,%d\n", info->color_f[0], info->color_f[1], info->color_f[2]);
+    printf("Color c is %d,%d,%d\n", info->color_c[0], info->color_c[1], info->color_c[2]);
     return (0);
 }

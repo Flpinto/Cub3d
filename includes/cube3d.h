@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:21:45 by flpinto           #+#    #+#             */
-/*   Updated: 2020/06/05 11:25:10 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/06/07 12:26:08 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,18 @@
 #include "../libft/libft.h"
 
 typedef struct       s_info
-{
+{   void    *tmp_mlx;
+    char    *texture_n;
+    char    *texture_o;
+    char    *texture_e;
+    char    *texture_s;
+    char    *texture_sprite;
+    int     color_f[3];
+    int     color_c[3];
     int     res_x;
     int     res_y;
 }                   t_info;
 
-int     main(int argc, char **argv);
+t_info   *ft_parse_info(char *filemap);
 
 # endif
