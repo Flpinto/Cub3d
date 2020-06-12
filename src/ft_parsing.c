@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/06 10:55:58 by flpinto           #+#    #+#             */
-/*   Updated: 2020/06/08 18:21:15 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/06/09 10:27:44 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ t_info      *ft_parse_info(char *filemap)
 	infomap = ft_calloc(sizeof(t_info), 1);
 	while ((i = get_next_line(fd, &mapline[j])) > 0)
 	{
+		printf("%s\n", mapline[j]); 
 		if (*mapline[j] == 'F' || *mapline[j] == 'C')
 			ft_get_color(mapline[j], infomap);
 		if (*mapline[j] == 'R')
@@ -80,10 +81,15 @@ t_info      *ft_parse_info(char *filemap)
 		if (*mapline[j] == 'N' || (*mapline[j] == 'S' 
 		|| (*mapline[j] == 'W' || (*mapline[j] == 'E'))))
 			ft_get_textures(mapline[j], infomap);
-		printf("%s\n", mapline[j]); 
+
+		if (infomap->res_x && infomap->res_y  && infomap->texture_e 
+		&& infomap->texture_n && infomap->texture_w 
+		&& infomap->texture_s && infomap->color_c && infomap->color_f) 
+			ft_get_map(mapline[j], infomap);
+		
 		j++;
 	}
-	printf("%s\n", mapline[j]);	
+	printf("%s\n", mapline[j]); 
 	close(fd);
 		
 	while (j-- > 0)

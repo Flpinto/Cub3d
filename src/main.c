@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:31:07 by flpinto           #+#    #+#             */
-/*   Updated: 2020/06/08 18:21:56 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/06/09 10:35:46 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ int     main(int argc, const char **argv)
     printf("North texture path : %s\n", info->texture_n);
     printf("Est   texture path : %s\n", info->texture_e);
     printf("West  texture path : %s\n", info->texture_w);
-   // ft_destroy_info(info);
+   ft_destroy_info(info);
     return (0);
 }
