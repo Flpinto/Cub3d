@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_destroy.c                                       :+:      :+:    :+:   */
+/*   ft_game.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/08 18:18:57 by flpinto           #+#    #+#             */
-/*   Updated: 2020/06/08 18:29:50 by flpinto          ###   ########.fr       */
+/*   Created: 2020/09/07 17:02:35 by flpinto           #+#    #+#             */
+/*   Updated: 2020/09/11 11:44:30 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void		ft_strdel(char *s)
+t_info  *ft_run_game(t_info *info)
 {
-	if (s != NULL)
-	{
-		s = NULL;
-		free(s);
-		s = NULL;
-	}
-}
+    void    *mlx_ptr;
 
-void    ft_destroy_info(t_info *info)
-{
-    int i;
+    mlx_ptr = mlx_init();
 
-    i = 0;
-    ft_strdel(info->texture_e);
-    ft_strdel(info->texture_w);
-    ft_strdel(info->texture_s);
-    ft_strdel(info->texture_n);
-
-    while (i++ < 4)
-        ft_strdel(info->color_c[i]);
-
+    while(1)
+        mlx_new_window(mlx_ptr, info->res_x, info->res_y, "Game");
+    return (info);
 }

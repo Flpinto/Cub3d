@@ -1,14 +1,4 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/06/04 10:31:31 by flpinto           #+#    #+#              #
-#    Updated: 2020/06/06 13:05:17 by flpinto          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+
 
 BINARY = Cub3D
 
@@ -16,8 +6,9 @@ LIBFT = ./libft/libft.a
 LIBFT_SRC := $(wildcard libft/*.c)
 LIBFT_OBJ := $(patsubst libft/%.c, libft/%.o, $(LIBFT_SRC))
 
-COMP = gcc -Wall -Wextra -Werror
-INCLUDES = -Iincludes -Llibft -Lmlx -Imlx
+COMP = gcc -Wall -Wextra -Werror -g3
+INCLUDES = -Iincludes -Imlx -Llibft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -lm
+
 
 SRC := $(wildcard src/*.c)
 OBJ := $(patsubst src/%.c, obj/%.o, $(SRC))
@@ -25,17 +16,17 @@ OBJ := $(patsubst src/%.c, obj/%.o, $(SRC))
 GREEN = \e[1m\e[32m
 RESET = \e[0m
 
+MLX = ./mlx/libmlx.a
 
 all: $(BINARY)
 
-$(BINARY): $(LIBFT) $(OBJ)
+$(BINARY): $(LIBFT) $(MLX) $(OBJ)
 	@echo -e "$(GREEN)==> Making Cub3D$(RESET)"
 	$(COMP) $(INCLUDES) $(OBJ) $(LIBFT) -o $(BINARY)
 
 $(LIBFT): $(LIBFT_OBJ)
 	@echo -e "$(GREEN)==> Making LIBFT$(RESET)"
 	ar rcs $(LIBFT) $(LIBFT_OBJ)
-
 
 libft/%.o: libft/%.c
 	$(COMP) -Iincludes -c $< -o $@
@@ -44,10 +35,30 @@ obj/%.o: src/%.c
 	mkdir -p obj
 	$(COMP) -Iincludes -c $< -o $@
 
+run: $(BINARY)
+	@echo -e "$(GREEN)==> Running binary$(RESET)"
+	@./$(BINARY) ./res/map1.cub
+
+runs: $(BINARY)
+	@echo -e "$(GREEN)==> Running binary with -save arg$(RESET)"
+	@./$(BINARY) ./res/map1.cub -save
+
+$(MLX):
+	@echo -e "$(GREEN)==> Making MLX$(RESET)"
+	make -C ./mlx
+
+norme:
+	#grep "printf" */*.[ch]
+	norminette src/*
+
 clean:
-	rm -rf libft/*.o obj/*
+	rm -rf libft/*.o obj/* mlx/*.o
+	rm -rf screenshot.bmp
 
 fclean: clean
-	rm -rf $(BINARY) $(LIBFT)
+	rm -rf $(BINARY) *.dSYM $(LIBFT)
+	make -C ./mlx clean
 
 re: fclean all
+
+rerun: re run
