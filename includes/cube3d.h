@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:21:45 by flpinto           #+#    #+#             */
-/*   Updated: 2020/09/07 17:55:26 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/09/15 15:49:11 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@
 #include "../mlx/mlx.h"
 
 
+typedef struct      s_game
+{
+    int     pos_x;
+    int     pos_y;
+    int     dir_x;
+    int     dir_y;
+    int     res_width;
+    int     res_height;
+}                   t_game;
+
 typedef struct       s_info
 {   
     void    *tmp_mlx;
@@ -35,6 +45,8 @@ typedef struct       s_info
     char     *color_f[3];
     char     *color_c[3];
     char    **map;
+    int     pos_x;
+    int     pos_y;
 }                   t_info;
 
 t_info      *ft_run_game(t_info *info);
