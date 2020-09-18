@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 18:28:56 by flpinto           #+#    #+#             */
-/*   Updated: 2020/09/06 18:33:28 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/09/18 11:53:42 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int     ft_get_y_max(char **map)
         i++;
     return (i);
 }
-int     ft_check_map_char(char **map)
+int     ft_check_map_char(char **map, t_info *info)
 {
     int x;
     int y;
@@ -36,7 +36,12 @@ int     ft_check_map_char(char **map)
         while(map[y][x])
         {
             if (map[y][x] == 'N' || map[y][x] == 'W' || map[y][x] == 'S' ||  map[y][x] == 'E')
+            {
+                info->pos_x = x;
+                info->pos_y = y;
+                info->orient = map[y][x];
                 sp_direction++;
+            }
             if (map[y][x] == '1' || map[y][x] == '0' || map[y][x] == 32 || 
             map[y][x] == 'N' || map[y][x] == 'W' || map[y][x] == 'S' ||  map[y][x] == 'E' ||
             map[y][x] == '2')
@@ -116,9 +121,9 @@ int     ft_check_inside(char **map)
     return (0);
 }
 */
-int     ft_check_map(char **map)
+int     ft_check_map(char **map, t_info *info)
 {
-    if (ft_check_map_char(map) == -1 || ft_check_boarder(map) == -1 )
+    if (ft_check_map_char(map, info) == -1 || ft_check_boarder(map) == -1 )
         return (-1);
     return (0);
 }

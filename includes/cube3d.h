@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:21:45 by flpinto           #+#    #+#             */
-/*   Updated: 2020/09/15 15:49:11 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/09/18 11:53:00 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ typedef struct      s_game
 {
     int     pos_x;
     int     pos_y;
+    int     orient;
     int     dir_x;
     int     dir_y;
     int     res_width;
-    int     res_height;
+    int     res_heigth;
 }                   t_game;
 
 typedef struct       s_info
@@ -47,6 +48,7 @@ typedef struct       s_info
     char    **map;
     int     pos_x;
     int     pos_y;
+    char    orient;
 }                   t_info;
 
 t_info      *ft_run_game(t_info *info);
@@ -55,7 +57,7 @@ void		ft_print_map(t_info *map);
 void        ft_get_textures(char *mapline, t_info *texture);
 int         ft_get_map(char *mapline, t_info *map);
 void        ft_destroy_info(t_info *info);
-int         ft_check_map(char **map);
+int         ft_check_map(char **map, t_info *info);
 int         ft_check_first_line(char *line);
 void        ft_get_color_c(char *mapline, t_info *color);
 void	    ft_get_color_f(char *mapline, t_info *color);
