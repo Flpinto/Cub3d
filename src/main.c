@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:31:07 by flpinto           #+#    #+#             */
-/*   Updated: 2020/09/18 11:50:41 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/09/22 02:11:30 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int     main(int argc, const char **argv)
 
     info = ft_parse_info((char *)argv[1]);
     
-    if (ft_check_map(info->map) == -1)
+    if (ft_check_map(info->map, info) == -1)
     {
         ft_destroy_info(info);
         return (0);

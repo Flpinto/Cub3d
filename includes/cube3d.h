@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:21:45 by flpinto           #+#    #+#             */
-/*   Updated: 2020/09/18 11:53:00 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/09/22 11:38:24 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,8 @@
 
 typedef struct      s_game
 {
-    int     pos_x;
-    int     pos_y;
-    int     orient;
-    int     dir_x;
-    int     dir_y;
-    int     res_width;
-    int     res_heigth;
+    void    *mlx_ptr;
+    void    *win_ptr;
 }                   t_game;
 
 typedef struct       s_info
