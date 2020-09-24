@@ -12,12 +12,35 @@
 
 #include "cube3d.h"
 
+int     ft_mouse_enter_window()
+{
+    printf("HEllo\n");
+
+    return(0);
+}
+
+int     ft_mouse_exit_window()
+{
+    printf("BYe\n");
+
+    return(0);
+}
+
+int     ft_render(t_game *game)
+{
+    return(0);
+}
+/*
 int     ft_clear_window(int keycode, t_game *game)
 {
-    if (keycode == 53)
+    
+    printf("KY-%d\n", keycode);
+    if (keycode == 65307)
         mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+    mlx_do_key_autorepeatoff(game->mlx_ptr);
     return (0);
 }
+*/
 t_info  *ft_run_game(t_info *info)
 {
     t_game  *game;
@@ -37,9 +60,13 @@ t_info  *ft_run_game(t_info *info)
             mlx_pixel_put(game->mlx_ptr, game->win_ptr, x, y, 0xbfefff);
         }
     }
-*/
 
 
+    mlx_hook(game->win_ptr, 7, 1L<<4, ft_mouse_enter_window, &game->mlx_ptr);
+    mlx_hook(game->win_ptr, 7, 1L<<5, ft_mouse_exit_window, &game->mlx_ptr);
+    mlx_hook(game->win_ptr, 2, 1L<<0, ft_clear_window, &game->mlx_ptr);
+    */
+    mlx_loop_hook(game->mlx_ptr, ft_clear_window, &game);
     mlx_loop(game->mlx_ptr);
     
     return (info);
