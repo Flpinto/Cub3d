@@ -8,8 +8,10 @@ LIBFT_OBJ := $(patsubst libft/%.c, libft/%.o, $(LIBFT_SRC))
 
 COMP = gcc -Wall -Wextra -Werror -g3
 
-INCLUDES = -Iincludes -I/usr/local/include/ -Llibft -lft -lm -L/usr/local/lib/ -L lmlx -lXext -lX11 -lpthread
-
+INCLUDES = -Iincludes -Imlx -Llibft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -lm
+ifeq ($(OS), Linux)
+	INCLUDES = -Iincludes -I/usr/local/include/ -Llibft -lft -lm -L/usr/local/lib/ -L lmlx -lXext -lX11 -lpthread
+endif
 
 SRC := $(wildcard src/*.c)
 OBJ := $(patsubst src/%.c, obj/%.o, $(SRC))
@@ -23,7 +25,7 @@ all: $(BINARY)
 
 $(BINARY): $(LIBFT) $(MLX) $(OBJ)
 	@echo -e "$(GREEN)==> Making Cub3D$(RESET)"
-	$(COMP) $(OBJ) $(MLX) $(LIBFT) -o $(BINARY) $(INCLUDES)
+	$(COMP) $(OBJ) $(LIBFT) -o $(BINARY) $(INCLUDES)
 
 $(LIBFT): $(LIBFT_OBJ)
 	@echo -e "$(GREEN)==> Making LIBFT$(RESET)"
