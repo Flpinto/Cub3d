@@ -27,9 +27,13 @@ void		ft_get_res(char *mapline, t_info *res)
 {
     mapline += 2;
     res->res_x = ft_atoi(mapline);
+	if (res->res_x > 1920)
+		res->res_x = 1920;
     while(ft_isdigit(*mapline))
         mapline++;
     res->res_y = ft_atoi(mapline);
+	if (res->res_y > 1080)
+		res->res_y = 1080;
 }
 
 void		ft_print_map(t_info *map)
