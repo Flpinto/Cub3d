@@ -36,16 +36,6 @@ void		ft_get_res(char *mapline, t_info *res)
 		res->res_y = 1080;
 }
 
-void		ft_print_map(t_info *map)
-{
-	int i = 0;
-	while(map->map[i]!= NULL)
-	{
-		printf("----%s----\n", map->map[i]);
-		i++;	
-	}
-}
-
 int    ft_get_map(char *mapline, t_info *map)
 {
     static int  mapst;

@@ -29,7 +29,19 @@ typedef struct      s_game
     void    *img;
 }                   t_game;
 
-typedef struct       s_info
+typedef struct      s_draw_map
+{
+    int     x;
+    int     y;
+    int     max_x;
+    int     max_y;
+    int     mini_x;
+    int     mini_y;
+    int     mini_y_s;
+    int     mini_x_s;
+}                   t_draw_map;
+
+typedef struct      s_info
 {   
     void    *tmp_mlx;
     char    *texture_n;
@@ -49,7 +61,6 @@ typedef struct       s_info
 
 t_info      *ft_run_game(t_info *info);
 t_info      *ft_parse_info(char *filemap);
-void		ft_print_map(t_info *map);
 void        ft_get_textures(char *mapline, t_info *texture);
 int         ft_get_map(char *mapline, t_info *map);
 void        ft_destroy_info(t_info *info);

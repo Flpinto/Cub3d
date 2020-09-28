@@ -27,7 +27,6 @@ int     main(int argc, const char **argv)
         return (0);
     }
     info = ft_run_game(info);
-    ft_print_map(info);
     ft_destroy_info(info);
     return (0);
 }
