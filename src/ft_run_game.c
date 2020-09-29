@@ -34,8 +34,17 @@ int     ft_keyrelease()
     return(0);
 }
 
+
 int     ft_keypress(int key, t_game *game)
 {
+    if (key == 119 || key == 97 || key == 115 || key == 100)
+        ft_move_in_map(key)
+    if (key ==  652930)
+    {
+        mlx_clear_window(game->mlx, game->win);
+        mlx_do_sync(game->mlx);
+    }
+    printf("%d\n", key);
     if (key == 65307)
         ft_exit_window(game);
     printf("PRESS\n");
