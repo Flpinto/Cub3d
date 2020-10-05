@@ -21,7 +21,11 @@ void		ft_strdel(char *s)
 		s = NULL;
 	}
 }
-
+void    ft_destroy_all(t_all * all)
+{
+    ft_destroy_info(all->info);
+    ft_destroy_game(all->game);
+}
 void    ft_destroy_info(t_info *info)
 {
     int i;

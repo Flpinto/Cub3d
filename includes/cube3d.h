@@ -21,7 +21,6 @@
 #include "../libft/libft.h"
 #include "../mlx/mlx.h"
 
-
 typedef struct      s_game
 {
     void    *mlx;
@@ -59,7 +58,13 @@ typedef struct      s_info
     char    orient;
 }                   t_info;
 
-t_info      *ft_run_game(t_info *info);
+typedef struct      s_all
+{
+    t_info  *info;
+    t_game  *game;
+}                   t_all;
+
+t_all      *ft_run_game(t_all *all);
 t_info      *ft_parse_info(char *filemap);
 void        ft_get_textures(char *mapline, t_info *texture);
 int         ft_get_map(char *mapline, t_info *map);
