@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:21:45 by flpinto           #+#    #+#             */
-/*   Updated: 2020/09/22 11:38:24 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/10/08 12:39:12 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,15 @@
 #include "get_next_line.h"
 #include "../libft/libft.h"
 #include "../mlx/mlx.h"
+# define ESC 53
+# define TOP 13
 
 typedef struct      s_game
 {
     void    *mlx;
     void    *win;
     void    *img;
+    
 }                   t_game;
 
 typedef struct      s_draw_map
@@ -38,6 +41,8 @@ typedef struct      s_draw_map
     int     mini_y;
     int     mini_y_s;
     int     mini_x_s;
+    int     wall_color;
+    int     floor_color;
 }                   t_draw_map;
 
 typedef struct      s_info
@@ -68,7 +73,7 @@ t_all      *ft_run_game(t_all *all);
 t_info      *ft_parse_info(char *filemap);
 void        ft_get_textures(char *mapline, t_info *texture);
 int         ft_get_map(char *mapline, t_info *map);
-void        ft_destroy_info(t_info *info);
+void        ft_destroy_all(t_all *all);
 int         ft_check_map(char **map, t_info *info);
 int         ft_check_first_line(char *line);
 void        ft_get_color_c(char *mapline, t_info *color);

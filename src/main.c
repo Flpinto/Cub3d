@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:31:07 by flpinto           #+#    #+#             */
-/*   Updated: 2020/09/24 10:42:17 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/10/07 21:38:38 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,10 @@ int     main(int argc, const char **argv)
     
     if (ft_check_map(all->info->map, all->info) == -1)
     {
-        ft_destroy_info(all->info);
+        ft_destroy_all(all);
         return (0);
     }
     all = ft_run_game(all);
-    ft_destroy_info(all->info);
-    all = NULL;
-    free(all);
+    ft_destroy_all(all);
     return (0);
 }
