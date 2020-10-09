@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 18:28:56 by flpinto           #+#    #+#             */
-/*   Updated: 2020/09/18 11:53:42 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/10/09 13:01:10 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int     ft_check_map_char(char **map, t_info *info)
                 x++;
             else
             {
-                printf("-----ERROR CHAR MAP -%c- INVALID-------\n", map[y][x]);
+                printf("-----ERROR CHAR MAP -> %c <- INVALID-------\n", map[y][x]);
                 return (-1);
             }
         }

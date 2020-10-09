@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:21:45 by flpinto           #+#    #+#             */
-/*   Updated: 2020/10/08 12:39:12 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/10/09 12:23:50 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 #include "../mlx/mlx.h"
 # define ESC 53
 # define TOP 13
+# define BOT 1
+# define LEFT 0
+# define RIGHT 2
 
 typedef struct      s_game
 {
@@ -43,6 +46,7 @@ typedef struct      s_draw_map
     int     mini_x_s;
     int     wall_color;
     int     floor_color;
+    int     player_color;
 }                   t_draw_map;
 
 typedef struct      s_info
