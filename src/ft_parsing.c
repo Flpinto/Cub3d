@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/06 10:55:58 by flpinto           #+#    #+#             */
-/*   Updated: 2020/08/27 14:34:22 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/10/12 13:18:10 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,8 @@ int    ft_get_map(char *mapline, t_info *map)
 	return (0);
 }
 
-t_info      *ft_parse_info(char *filemap)
+t_info      *ft_parse_info(char *filemap, t_info *infomap)
 {
-	t_info  *infomap;
 	char	*mapline[1024];
 	int	 fd;
 	int	 i;

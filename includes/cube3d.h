@@ -6,17 +6,21 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:21:45 by flpinto           #+#    #+#             */
-/*   Updated: 2020/10/09 12:23:50 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/10/12 13:23:15 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <fcntl.h>
+# include <stdarg.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <string.h>
+# include <math.h>
+# include <fcntl.h>
 #include "get_next_line.h"
 #include "../libft/libft.h"
 #include "../mlx/mlx.h"
@@ -30,9 +34,16 @@ typedef struct      s_game
 {
     void    *mlx;
     void    *win;
-    void    *img;
     
 }                   t_game;
+
+typedef struct  s_data {
+    void    *img;
+    char    *addr;
+    int     bits_per_pixel;
+    int     line_length;
+    int     endian;
+}                   t_data;
 
 typedef struct      s_draw_map
 {
@@ -69,15 +80,16 @@ typedef struct      s_info
 
 typedef struct      s_all
 {
-    t_info  *info;
-    t_game  *game;
+    t_info  info;
+    t_game  game;
+    t_data  img;
 }                   t_all;
 
-t_all      *ft_run_game(t_all *all);
-t_info      *ft_parse_info(char *filemap);
+t_all       *ft_run_game(t_all *all);
+t_info      *ft_parse_info(char *filemap, t_info *infomap);
 void        ft_get_textures(char *mapline, t_info *texture);
 int         ft_get_map(char *mapline, t_info *map);
-void        ft_destroy_all(t_all *all);
+int         ft_destroy_all(t_all *all);
 int         ft_check_map(char **map, t_info *info);
 int         ft_check_first_line(char *line);
 void        ft_get_color_c(char *mapline, t_info *color);
