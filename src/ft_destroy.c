@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:18:57 by flpinto           #+#    #+#             */
-/*   Updated: 2020/10/12 13:24:05 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/10/15 12:36:34 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void    ft_destroy_info(t_info *info)
     ft_strdel(info->texture_sprite);
     while (i++ < 4)
         ft_strdel(info->color_c[i]);
-        i = 0;
+    i = 0;
     while (i++ < 4)
         ft_strdel(info->color_f[i]);
 
