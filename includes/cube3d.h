@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:21:45 by flpinto           #+#    #+#             */
-/*   Updated: 2020/10/12 13:23:15 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/10/16 14:55:53 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,15 @@ typedef struct      s_info
     int     pos_x;
     int     pos_y;
     char    orient;
+    char    *buff;
+    int     end;
 }                   t_info;
 
 typedef struct      s_all
 {
-    t_info  info;
-    t_game  game;
-    t_data  img;
+    t_info  *info;
+    t_game  *game;
+    t_data  *img;
 }                   t_all;
 
 t_all       *ft_run_game(t_all *all);

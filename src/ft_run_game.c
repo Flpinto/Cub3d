@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 17:02:35 by flpinto           #+#    #+#             */
-/*   Updated: 2020/10/15 17:03:13 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/10/16 13:10:16 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,16 @@ int     ft_len_map(char **map)
         y++;
     return (y - 1);
 }
-t_draw_map    ft_init_draw(t_draw_map draw, t_all *all)
+t_draw_map    *ft_init_draw(t_draw_map *draw, t_all *all)
 {
-    draw.max_x = ft_strlen(all->info.map[1]);
-    draw.max_y = ft_len_map(all->info.map);
-    draw.mini_x = all->info.res_x / draw.max_x;
-    draw.mini_y = all->info.res_y / draw.max_y;
-    draw.wall_color = 0xff0000;
-    draw.floor_color = 0x808080;
-    draw.player_color = 0x00ff00;
+
+    draw->max_x = ft_strlen(all->info.map[1]);
+    draw->max_y = ft_len_map(all->info.map);
+    draw->mini_x = all->info.res_x / draw->max_x;
+    draw->mini_y = all->info.res_y / draw->max_y;
+    draw->wall_color = 0xff0000;
+    draw->floor_color = 0x808080;
+    draw->player_color = 0x00ff00;
 
     return (draw);
 
@@ -51,7 +52,8 @@ int    ft_draw_mini_map(t_all *all)
 
     x = 0;
     y = 1;
-    draw = ft_init_draw(draw, all);
+
+    ft_init_draw(&draw, all);
     draw.y = 0;
     while (y * draw.mini_y < y * draw.mini_y + draw.mini_y && y * draw.mini_y < all->info.res_y)
     {
@@ -79,7 +81,7 @@ int    ft_draw_mini_map(t_all *all)
         }
         y++; 
     }
-    mlx_put_image_to_window(all->game.mlx, all->game.win, all->img.img, 0, 0);
+    
     return(0);
 }
 
@@ -124,10 +126,8 @@ t_all  *ft_run_game(t_all *all)
     all->img.addr = mlx_get_data_addr(all->img.img, &all->img.bits_per_pixel, &all->img.line_length,
                                  &all->img.endian);
     
-                     
     ft_draw_mini_map(all);
-    
-    printf("Pos -- %d %d --\n", all->info.pos_y, all->info.pos_x);
+    mlx_put_image_to_window(all->game.mlx, all->game.win, all->img.img, 0, 0);
     mlx_hook(all->game.win, 2, 1L<<0, (*ft_keypress), &all);
     mlx_hook(all->game.win, 3, 1L<<1, (*ft_keyrelease), &all);
     mlx_loop(all->game.mlx);
