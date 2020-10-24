@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:21:45 by flpinto           #+#    #+#             */
-/*   Updated: 2020/10/16 14:55:53 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/10/24 17:06:28 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,18 @@ typedef struct      s_draw_map
 }                   t_draw_map;
 
 typedef struct      s_info
-{   
+{
+    int		vno;
+	int		vso;
+	int		vwe;
+	int		vea;
+	int		vs;
+	int		vf;
+	int		vc;
+	int		vr;
+    int     vsp;
+    int     v;
+    int     vall;
     void    *tmp_mlx;
     char    *texture_n;
     char    *texture_w;
@@ -70,14 +81,16 @@ typedef struct      s_info
     char    *texture_sprite;
     int     res_x;
     int     res_y;
-    char     *color_f[3];
-    char     *color_c[3];
+    int     color_f[3];
+    int     color_c[3];
     char    **map;
     int     pos_x;
     int     pos_y;
     char    orient;
     char    *buff;
+    int     i;
     int     end;
+    char    **tab;
 }                   t_info;
 
 typedef struct      s_all
@@ -88,13 +101,17 @@ typedef struct      s_all
 }                   t_all;
 
 t_all       *ft_run_game(t_all *all);
-t_info      *ft_parse_info(char *filemap, t_info *infomap);
-void        ft_get_textures(char *mapline, t_info *texture);
-int         ft_get_map(char *mapline, t_info *map);
+t_info       ft_parse_info(char *filemap, t_info info);
+t_info      ft_get_res(t_info info);
+t_info      ft_get_color(t_info info, char c);
+t_info	    ft_parse_s(t_info info);
+t_info	    ft_parse_n(t_info info);
+t_info  	ft_parse_w(t_info info);
+t_info  	ft_parse_e(t_info info);
+t_info	    ft_parse_sprite(t_info info);
+t_info      ft_parse_map(t_info info);
 int         ft_destroy_all(t_all *all);
 int         ft_check_map(char **map, t_info *info);
 int         ft_check_first_line(char *line);
-void        ft_get_color_c(char *mapline, t_info *color);
-void	    ft_get_color_f(char *mapline, t_info *color);
 
 # endif

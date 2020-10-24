@@ -8,9 +8,9 @@ LIBFT_OBJ := $(patsubst libft/%.c, libft/%.o, $(LIBFT_SRC))
 
 COMP = gcc -Wall -Wextra -Werror -g3
 
-INCLUDES = -Iincludes -I/usr/local/include/ -Llibft -lft -lm -L/usr/local/lib/ -framework OpenGL -framework AppKit
+#INCLUDES = -Iincludes -I/usr/local/include/ -Llibft -lft -lm -L/usr/local/lib/ -framework OpenGL -framework AppKit
 
-#INCLUDES = -Iincludes -I/usr/local/include/ -Llibft -lft -lm -L/usr/local/lib/ -L lmlx -lXext -lX11
+INCLUDES = -Iincludes -I/usr/local/include/ -Llibft -lft -lm -L/usr/local/lib/ -L lmlx -lXext -lX11
 
 
 SRC := $(wildcard src/*.c)
