@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/06 10:55:58 by flpinto           #+#    #+#             */
-/*   Updated: 2020/10/24 17:04:38 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/11/09 08:42:44 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,14 @@ int		ft_init_validator(t_info *info)
 	info->vc = 0;
 	info->vr = 0;
 	info->v = 2;
+	info->vall = 0;
+	info->maplen = 0;
+	info->mapsize = 0;
 	return (0);
 }
-t_info		ft_check_data(t_info info)
-{
+t_info		ft_check_data(t_info info, int fd, char *filemap)
+{	
+	
 	if (info.buff[info.i] == 'R' && ft_check_sp(info, 1) == 1)
 		return (ft_get_res(info));
 	if ((info.buff[info.i] == 'F' || info.buff[info.i] == 'C') &&
@@ -53,16 +57,15 @@ t_info		ft_check_data(t_info info)
 			ft_check_sp(info, 2) == 1)
 		return (ft_parse_e(info));
 	if (info.v == 2 && info.vall == 8)
-		return (ft_parse_map(info));
+		return (ft_parse_map(info, fd, filemap));
 	
 	return (info);
 }
 
 
-t_info		ft_parse(int fd, t_info info)
+t_info		ft_parse(int fd, t_info info, char *filemap)
 {
 	info.i = 0;
-	
 	info.end = 1;
 	while (info.end == 1)
 	{
@@ -71,7 +74,7 @@ t_info		ft_parse(int fd, t_info info)
 		{
 			while(info.buff[info.i] == ' ' && info.buff[info.i] == '\t')
 				info.i++;
-			info = ft_check_data(info);
+			info = ft_check_data(info, fd, filemap);
 			free(info.buff);
 		}
 		else
@@ -97,8 +100,7 @@ t_info      ft_parse_info(char *filemap, t_info info)
 		exit(0);
 	}
 	ft_init_validator(&info);
-	info = ft_parse(fd, info);
+	info = ft_parse(fd, info, filemap);
 	close(fd);
-
 	return (info);
 }

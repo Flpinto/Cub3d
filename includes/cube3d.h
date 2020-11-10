@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:21:45 by flpinto           #+#    #+#             */
-/*   Updated: 2020/10/24 17:06:28 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/11/09 12:14:42 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ typedef struct      s_info
     char    *buff;
     int     i;
     int     end;
+    int     mapsize;
+    int     maplen; 
     char    **tab;
+    int     startmap; 
 }                   t_info;
 
 typedef struct      s_all
@@ -100,8 +103,8 @@ typedef struct      s_all
     t_data  *img;
 }                   t_all;
 
-t_all       *ft_run_game(t_all *all);
-t_info       ft_parse_info(char *filemap, t_info info);
+t_all       ft_run_game(t_all all);
+t_info      ft_parse_info(char *filemap, t_info info);
 t_info      ft_get_res(t_info info);
 t_info      ft_get_color(t_info info, char c);
 t_info	    ft_parse_s(t_info info);
@@ -109,9 +112,10 @@ t_info	    ft_parse_n(t_info info);
 t_info  	ft_parse_w(t_info info);
 t_info  	ft_parse_e(t_info info);
 t_info	    ft_parse_sprite(t_info info);
-t_info      ft_parse_map(t_info info);
+t_info      ft_parse_map(t_info info, int fd, char *filemap);
+t_info      ft_get_map(t_info info, int fd);
 int         ft_destroy_all(t_all *all);
-int         ft_check_map(char **map, t_info *info);
+t_info      ft_check_map(t_info info);
 int         ft_check_first_line(char *line);
 
 # endif

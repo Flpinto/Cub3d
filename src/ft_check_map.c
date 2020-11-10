@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 18:28:56 by flpinto           #+#    #+#             */
-/*   Updated: 2020/10/15 12:44:34 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/11/04 17:54:43 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,34 +21,34 @@ int     ft_get_y_max(char **map)
         i++;
     return (i);
 }
-int     ft_check_map_char(char **map, t_info *info)
+int     ft_check_map_char(t_info *info)
 {
     int x;
     int y;
     int sp_direction;
 
     x = 0;
-    y = 2;
+    y = 0;
     sp_direction = 0;
-    while(map[y])
+    while(info->map[y])
     {
         x = 0;
-        while(map[y][x])
+        while(info->map[y][x])
         {
-            if (map[y][x] == 'N' || map[y][x] == 'W' || map[y][x] == 'S' ||  map[y][x] == 'E')
+            if (info->map[y][x] == 'N' || info->map[y][x] == 'W' || info->map[y][x] == 'S' ||  info->map[y][x] == 'E')
             {
                 info->pos_x = x;
                 info->pos_y = y;
-                info->orient = map[y][x];
+                info->orient = info->map[y][x];
                 sp_direction++;
             }
-            if (map[y][x] == '1' || map[y][x] == '0' || map[y][x] == 32 || 
-            map[y][x] == 'N' || map[y][x] == 'W' || map[y][x] == 'S' ||  map[y][x] == 'E' ||
-            map[y][x] == '2')
+            if (info->map[y][x] == '1' || info->map[y][x] == '0' || info->map[y][x] == 32 || 
+            info->map[y][x] == 'N' || info->map[y][x] == 'W' || info->map[y][x] == 'S' ||  info->map[y][x] == 'E' ||
+            info->map[y][x] == '2')
                 x++;
             else
             {
-                printf("-----ERROR CHAR MAP -> %c <- INVALID-------\n", map[y][x]);
+                printf("-----ERROR CHAR MAP -> %c <- INVALID-------\n", info->map[y][x]);
                 return (-1);
             }
         }
@@ -58,32 +58,32 @@ int     ft_check_map_char(char **map, t_info *info)
         return (-1);
     return (0);
 }
-int     ft_check_boarder(char **map)
+int     ft_check_boarder(t_info *info)
 {
     int x;
     int y;
     int y_max;
 
     x = 0;
-    y = 1;
-    y_max = ft_get_y_max(map);
-    while(map[y])
+    y = 0;
+    y_max = ft_get_y_max(info->map);
+    while(info->map[y])
     {
         x = 0;
-        while(map[y][x])
+        while(info->map[y][x])
         {
-            while (map[y][x] == ' ')
+            while (info->map[y][x] == ' ')
                 x++;
-            if ((map[y][x] != '1' && map[y][x - 1] == ' ' && map[y][x + 1] != ' ') || 
-            (map[y][x] != '1' && x == 0) || (map[y][x] != '1' && map[y][x + 1] == '\0'))
+            if ((info->map[y][x] != '1' && info->map[y][x - 1] == ' ' && info->map[y][x + 1] != ' ') || 
+            (info->map[y][x] != '1' && x == 0) || (info->map[y][x] != '1' && info->map[y][x + 1] == '\0'))
             {
-                printf("Error Border %c isn't a border character", map[y][x]);
+                printf("Error Border %c isn't a border character", info->map[y][x]);
                 return (-1);
             }
-            else if ((y == y_max - 1 && map[y][x] != '1' && map[y][x] != ' ') ||
-            (y == 1 && map[y][x] != '1' && map[y][x] != ' '))
+            else if ((y == y_max - 1 && info->map[y][x] != '1' && info->map[y][x] != ' ') ||
+            (y == 1 && info->map[y][x] != '1' && info->map[y][x] != ' '))
             {
-                printf("Error Border %c ", map[y][x]);
+                printf("Error Border %c ", info->map[y][x]);
                 return (-1);
             }
             else
@@ -92,7 +92,6 @@ int     ft_check_boarder(char **map)
         y++;
     }
     return (0);
-  
 }
 /*
 int     ft_check_inside(char **map)
@@ -121,9 +120,11 @@ int     ft_check_inside(char **map)
     return (0);
 }
 */
-int     ft_check_map(char **map, t_info *info)
+t_info     ft_check_map(t_info info)
 {
-    if (ft_check_map_char(map, info) == -1 || ft_check_boarder(map) == -1 )
-        return (-1);
-    return (0);
+    ft_check_map_char(&info);
+    ft_check_boarder(&info);
+    if (info.v == -1)
+        info.v = -1;
+    return (info);
 }
