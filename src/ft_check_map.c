@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 18:28:56 by flpinto           #+#    #+#             */
-/*   Updated: 2020/11/04 17:54:43 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/11/13 14:24:00 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,10 @@ int     ft_check_inside(char **map)
 */
 t_info     ft_check_map(t_info info)
 {
-    ft_check_map_char(&info);
-    ft_check_boarder(&info);
+    info.pos_x = 0;
+    info.pos_y = 0;
+    info.v = ft_check_map_char(&info);
+    //ft_check_boarder(&info);
     if (info.v == -1)
         info.v = -1;
     return (info);

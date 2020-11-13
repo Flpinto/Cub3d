@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:21:45 by flpinto           #+#    #+#             */
-/*   Updated: 2020/11/09 12:14:42 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/11/13 11:50:21 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 #include "get_next_line.h"
 #include "../libft/libft.h"
 #include "../mlx/mlx.h"
-# define ESC 53
-# define TOP 13
-# define BOT 1
-# define LEFT 0
-# define RIGHT 2
+# define ESC 65307
+# define TOP 119
+# define BOT 115
+# define LEFT 97
+# define RIGHT 100
 
 typedef struct      s_game
 {
@@ -117,5 +117,6 @@ t_info      ft_get_map(t_info info, int fd);
 int         ft_destroy_all(t_all *all);
 t_info      ft_check_map(t_info info);
 int         ft_check_first_line(char *line);
+int         ft_mv_n(int key, t_all *all);
 
 # endif

@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:31:07 by flpinto           #+#    #+#             */
-/*   Updated: 2020/11/09 12:14:14 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/11/12 11:21:59 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,17 @@ int     main(int argc, const char **argv)
 		exit(0);
     }
     info = ft_parse_info((char *)argv[1], info);
+    info = ft_check_map(info);
     all.info = &info;
+    all = ft_run_game(all);
+
+    ft_destroy_all(&all);
+    return (0);
+}
+
+
+/*
+    Print all elements of the map file.
     
     printf("Res : %d x %d\n", all.info->res_x, all.info->res_y);
     printf("Color Floor : %d,%d,%d\n", info.color_f[0], info.color_f[1], info.color_f[2]);
@@ -37,7 +47,4 @@ int     main(int argc, const char **argv)
         printf("%s\n", info.map[i]);
         i++;
     }
-    all = ft_run_game(all);
-    ft_destroy_all(&all);
-    return (0);
-}
+*/
