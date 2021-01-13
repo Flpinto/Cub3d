@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 17:03:59 by flpinto           #+#    #+#             */
-/*   Updated: 2020/11/12 16:51:46 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/12/04 17:25:29 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ t_info      ft_get_map_len(t_info info, int fd, char *filemap)
     if (info.end != 0)
         info.v = 0;
     close(fd);
-    info.i = 0;
     info = ft_return_to_map(info, fd, filemap);
     info = ft_get_map(info, fd);
     return (info);
@@ -78,6 +77,6 @@ t_info      ft_parse_map(t_info info, int fd, char *filemap)
    
     if (info.maplen == 0)
         info = ft_get_map_len(info, fd, filemap);
-    ft_check_map(info);
+    //ft_check_map(info);
     return (info);
 }

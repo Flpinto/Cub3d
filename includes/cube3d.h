@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:21:45 by flpinto           #+#    #+#             */
-/*   Updated: 2020/11/13 11:50:21 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/01/10 15:01:58 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,46 @@
 # define BOT 115
 # define LEFT 97
 # define RIGHT 100
+# define RRIGHT 65361
+# define RLEFT 65363
+
+typedef struct      s_vect
+{
+    int     y;
+    int     x;
+}                   t_vect;
+
+typedef struct      s_ray
+{
+    double  time;
+    double  oldtime;
+    double  camx;
+    double  raydirx;
+    double  raydiry;
+    int     lmapx;
+    double  sidedistx;
+    double  sidedisty;
+    double  deltadistx;
+    double  deltadisty;
+    double  perpwalldist;
+    double  step;
+    double  stepx;
+    double  stepy;
+    int     hit;
+    int     side;
+    double  lineh;
+    int     drawst;
+    int     drawend;
+    int     textnum;
+    double  wallx;
+    int     texx;
+    int     texy;
+    double  texpos;
+    int     vectx;
+    int     vecty;
+    int     x;
+    int     y;  
+}                   t_ray;
 
 typedef struct      s_game
 {
@@ -38,11 +78,22 @@ typedef struct      s_game
 }                   t_game;
 
 typedef struct  s_data {
-    void    *img;
-    char    *addr;
-    int     bits_per_pixel;
-    int     line_length;
-    int     endian;
+    void    *img[6];
+    char    *addr[6];
+    int     bits_per_pixel[6];
+    int     line_length[6];
+    int     endian[6];
+    int		textw[6];
+	int		texth[6];
+	float	x;
+	float	xb;
+	float	y;
+	float	yb;
+	float	tilex;
+	float	tiley;
+	int		crgb;
+	int		ok;
+	int		frgb;
 }                   t_data;
 
 typedef struct      s_draw_map
@@ -84,8 +135,8 @@ typedef struct      s_info
     int     color_f[3];
     int     color_c[3];
     char    **map;
-    int     pos_x;
-    int     pos_y;
+    double     pos_x;
+    double     pos_y;
     char    orient;
     char    *buff;
     int     i;
@@ -93,7 +144,14 @@ typedef struct      s_info
     int     mapsize;
     int     maplen; 
     char    **tab;
-    int     startmap; 
+    int     startmap;
+    double  mapx;
+    double  mapy;
+    double  dirx;
+    double  diry;
+    double  planex;
+    double  planey;
+    int     key;
 }                   t_info;
 
 typedef struct      s_all
@@ -101,6 +159,7 @@ typedef struct      s_all
     t_info  *info;
     t_game  *game;
     t_data  *img;
+    t_ray   *ray;
 }                   t_all;
 
 t_all       ft_run_game(t_all all);
@@ -116,7 +175,18 @@ t_info      ft_parse_map(t_info info, int fd, char *filemap);
 t_info      ft_get_map(t_info info, int fd);
 int         ft_destroy_all(t_all *all);
 t_info      ft_check_map(t_info info);
+t_data      ft_get_img_by_file(t_data img, t_all all);
 int         ft_check_first_line(char *line);
 int         ft_mv_n(int key, t_all *all);
+int         ft_init_ray(t_ray *ray);
+int         ft_ray(t_all *all);
+void        ft_loop(t_all *all);
+void	    ft_move_cam(t_all *all);
+int         ft_exit_window(t_all *all);
+void        ft_init_direction(t_all *all);
+int         ft_keypressed(t_all *all);
+int         ft_keypress(int key, t_all *all);
+int         ft_keyrelease(int key, t_all *all);
+int         ft_move_in_map(int key, t_all *all);
 
 # endif

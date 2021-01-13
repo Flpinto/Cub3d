@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 18:28:56 by flpinto           #+#    #+#             */
-/*   Updated: 2020/11/13 14:24:00 by flpinto          ###   ########.fr       */
+/*   Updated: 2020/12/07 15:05:27 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int     ft_check_map_char(t_info *info)
         {
             if (info->map[y][x] == 'N' || info->map[y][x] == 'W' || info->map[y][x] == 'S' ||  info->map[y][x] == 'E')
             {
-                info->pos_x = x;
-                info->pos_y = y;
                 info->orient = info->map[y][x];
                 sp_direction++;
             }
@@ -51,7 +49,7 @@ int     ft_check_map_char(t_info *info)
                 printf("-----ERROR CHAR MAP -> %c <- INVALID-------\n", info->map[y][x]);
                 return (-1);
             }
-        }
+        }  
         y++;
     }
     if (sp_direction != 1)

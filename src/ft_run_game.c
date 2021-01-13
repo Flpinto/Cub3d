@@ -6,21 +6,12 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 17:02:35 by flpinto           #+#    #+#             */
-/*   Updated: 2020/11/13 11:50:27 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/01/10 12:14:52 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-int     ft_len_map(char **map)
-{
-    int y;
-
-    y = 0; 
-    while (map[y])
-        y++;
-    return (y);
-}
 t_draw_map    *ft_init_draw(t_draw_map *draw, t_all all)
 {
 
@@ -36,76 +27,53 @@ t_draw_map    *ft_init_draw(t_draw_map *draw, t_all all)
 
 }
 
-void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void    ft_print_map(char **map, t_all *all)
 {
-    char    *dst;
+    int x;
+    int y;
 
-    dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-    *(unsigned int*)dst = color;
-}
-
-
-
-int     ft_exit_window(t_all *all)
-{   
-    mlx_destroy_window(all->game->mlx, all->game->win);
-    ft_destroy_all(all);
-    exit(0);
-}
-
-void    ft_print_map(char **map)
-{
-    int i;
-
-    i = 0;
-    while (map[i])
+    y = 0;
+    while (map[y])
     {
-        printf("%s\n", map[i]);
-        i++;
+        x = 0;
+        while (map[y][x])
+        {
+            if (map[y][x] == '0' && map[y][x] == map[(int)all->info->pos_y][(int)all->info->pos_x])
+                printf("X");
+            else
+                printf("%c", map[y][x]);
+            x++;
+        }
+        printf("\n"); 
+        y++;
     }
 }
-int     ft_move_in_map(int key, t_all *all)
-{
-    if (all->info->orient == 'N')
-        ft_mv_n(key, all);
-    ft_print_map(all->info->map);
-    return (0);
-}
-int    ft_keypress(int key, t_all *all)
-{
-    printf("kepose -- %d %d --\n", all->info->pos_y, all->info->pos_x);
-    if (key == TOP || key == BOT || key == LEFT || key == RIGHT)
-        ft_move_in_map(key, all);
-    if (key ==  ESC)
-        ft_exit_window(all);
-    return (0);
-}
-
-int     ft_keyrelease(int key)
-{
-    printf("Release - %d - \n", key);
-    return (0);
-}
-
 
 
 t_all  ft_run_game(t_all all)
 {
-    t_game game;
-    t_data img;
+    t_game      game;
+    t_data      img;
+    t_ray       ray;
 
-    all.img = &img;
+    all.ray = &ray;
     all.game = &game;
     all.game->mlx = mlx_init();
     all.game->win = mlx_new_window(all.game->mlx, all.info->res_x, all.info->res_y, "Cub3d by Mollo");
-    all.img->img = mlx_new_image(all.game->mlx, all.info->res_x, all.info->res_y);
-    all.img->addr = mlx_get_data_addr(all.img->img, &all.img->bits_per_pixel, &all.img->line_length,
-                                 &all.img->endian);
-    
+    img.img[0] = mlx_new_image(all.game->mlx, all.info->res_x, all.info->res_y);
+    img = ft_get_img_by_file(img, all);
+    all.img = &img;
     //ft_draw_mini_map(all);
-    mlx_put_image_to_window(all.game->mlx, all.game->win, all.img->img, 0, 0);
+    
+    all.info->pos_x = 0;
+    all.info->pos_y = 0;
+    ft_init_direction(&all);
+    ft_ray(&all);
+    
+    mlx_put_image_to_window(all.game->mlx, all.game->win, all.img->img[0], 0, 0);
     mlx_hook(all.game->win, 2, 1L<<0, (*ft_keypress), &all);
     mlx_hook(all.game->win, 3, 1L<<1, (*ft_keyrelease), &all);
+    mlx_loop_hook(all.game->mlx, (*ft_keypressed), &all);
     mlx_loop(all.game->mlx);
     return (all);
 }

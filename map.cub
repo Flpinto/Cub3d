@@ -1,11 +1,11 @@
-R 800 600
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
-S ./path_to_the_sprite_texture
-F 220, 100, 255
-C 225                ,30   ,0
+R 1280 720
+SO ./texturexpm/168/gypte.xpm
+NO ./texturexpm/168/grille.xpm
+EA ./texturexpm/168/halogris.xpm
+WE ./texturexpm/168/haloski.xpm
+S ./texturexpm/sprite/117.xpm
+C 0 	,	0,  200
+F 50,50,         40
 1111111111111111111111111
 1000000000111000000000001
 1000000000000000000000001
@@ -16,7 +16,7 @@ C 225                ,30   ,0
 1111000111111111100001111
 1000000000111000000000001
 1000000000111000000000001
-1000000000111000000000N01
+100000000011100000000E001
 1000000000000000000000001
 1000000000111000000000001
 1111111111111111111111111
