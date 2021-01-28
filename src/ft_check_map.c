@@ -6,125 +6,119 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 18:28:56 by flpinto           #+#    #+#             */
-/*   Updated: 2020/12/07 15:05:27 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/01/28 15:55:58 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-int     ft_get_y_max(char **map)
+int			ft_check_map_char(t_info *info)
 {
-    int i;
+	int x;
+	int y;
+	int stpos;
 
-    i = 1;
-    while (map[i])
-        i++;
-    return (i);
+	y = 0;
+	stpos = 0;
+	while (info->map[y])
+	{
+		x = 0;
+		while (info->map[y][x])
+		{
+			if (ft_check_stpos(info->map[y][x]) == 1)
+				stpos++;
+			if (ft_check_char(info->map[y][x]) != 1)
+				printf("Error : -%c- Wrong map character\n", info->map[y][x]);
+			x++;
+		}
+		y++;
+	}
+	if (stpos > 1)
+		printf("Error : multiple start-position\n");
+	if (stpos < 1)
+		printf("Error : no start-position\n");
+	return (0);
 }
-int     ft_check_map_char(t_info *info)
-{
-    int x;
-    int y;
-    int sp_direction;
 
-    x = 0;
-    y = 0;
-    sp_direction = 0;
-    while(info->map[y])
-    {
-        x = 0;
-        while(info->map[y][x])
-        {
-            if (info->map[y][x] == 'N' || info->map[y][x] == 'W' || info->map[y][x] == 'S' ||  info->map[y][x] == 'E')
-            {
-                info->orient = info->map[y][x];
-                sp_direction++;
-            }
-            if (info->map[y][x] == '1' || info->map[y][x] == '0' || info->map[y][x] == 32 || 
-            info->map[y][x] == 'N' || info->map[y][x] == 'W' || info->map[y][x] == 'S' ||  info->map[y][x] == 'E' ||
-            info->map[y][x] == '2')
-                x++;
-            else
-            {
-                printf("-----ERROR CHAR MAP -> %c <- INVALID-------\n", info->map[y][x]);
-                return (-1);
-            }
-        }  
-        y++;
-    }
-    if (sp_direction != 1)
-        return (-1);
-    return (0);
-}
-int     ft_check_boarder(t_info *info)
+void		ft_error_hole(void)
 {
-    int x;
-    int y;
-    int y_max;
+	printf("Error : Dangerous void in map\n");
+}
 
-    x = 0;
-    y = 0;
-    y_max = ft_get_y_max(info->map);
-    while(info->map[y])
-    {
-        x = 0;
-        while(info->map[y][x])
-        {
-            while (info->map[y][x] == ' ')
-                x++;
-            if ((info->map[y][x] != '1' && info->map[y][x - 1] == ' ' && info->map[y][x + 1] != ' ') || 
-            (info->map[y][x] != '1' && x == 0) || (info->map[y][x] != '1' && info->map[y][x + 1] == '\0'))
-            {
-                printf("Error Border %c isn't a border character", info->map[y][x]);
-                return (-1);
-            }
-            else if ((y == y_max - 1 && info->map[y][x] != '1' && info->map[y][x] != ' ') ||
-            (y == 1 && info->map[y][x] != '1' && info->map[y][x] != ' '))
-            {
-                printf("Error Border %c ", info->map[y][x]);
-                return (-1);
-            }
-            else
-                x++;         
-        }
-        y++;
-    }
-    return (0);
-}
-/*
-int     ft_check_inside(char **map)
+int			ft_check_inside_map(t_info *info)
 {
-    int x;
-    int y;
+	int x;
+	int y;
 
-    x = 0;
-    y = 1;
-    while(map[y])
-    {
-        x = 0;
-        while(map[y][x])
-        {
-            if (map[y][x] == ' ' && (map[y][x - 1] == '0' || map[y][x + 1] == '0' ||
-             map[y - 1][x] == '0' || map[y + 1][x] == '0'))
-            {
-                printf("Error!! --%d--- ---%d---- UPD Whole in the map", y, x);
-                return (-1);
-            }
-            else
-                x++;
-        }
-        y++;
-    }
-    return (0);
+	y = 1;
+	while (info->map[y] && y < info->maplen - 1)
+	{
+		
+		x = 1;
+		while (info->map[y][x] && x < info->mapsize - 1)
+		{
+			if (info->map[y][x] == ' ' && ((info->map[y][x + 1] != '1' || info->map[y][x + 1] != ' ') && (info->map[y][x - 1] != '1' || info->map[y][x - 1] != ' ')))
+			{
+				ft_error_hole();
+				return (-1);
+			}/*
+			if (info->map[y][x] == ' ' && ((info->map[y + 1][x] != '1' || info->map[y + 1][x] != ' ') && (info->map[y - 1][x] != '1' || info->map[y - 1][x] != ' ')))
+			{
+				ft_error_hole();
+				return (-1);
+			}*/
+			x++;
+		}
+		y++;
+	}
+	return (0);
 }
-*/
-t_info     ft_check_map(t_info info)
+
+int			ft_check_boarder(t_info *info)
 {
-    info.pos_x = 0;
-    info.pos_y = 0;
-    info.v = ft_check_map_char(&info);
-    //ft_check_boarder(&info);
-    if (info.v == -1)
-        info.v = -1;
-    return (info);
+	int x;
+	int y;
+
+	y = 0;
+	while (info->map[y])
+	{
+		x = 0;
+		while (info->map[y][x])
+		{
+			if ((y == 0 || y == info->maplen - 1) && (info->map[y][x] != '1' && info->map[y][x] != ' '))
+			{
+				ft_error_wall_border();
+				return (-1);
+			}
+			if ((x == 0 || x == info->mapsize - 1) &&
+			(info->map[y][x] != '1' && info->map[y][x] != ' '))
+			{
+				ft_error_wall_border();
+				return (-1);
+			}
+			if (((x == 0 && info->map[y][x] == ' ' && (info->map[y][x + 1] != '1' && info->map[y][x + 1] != ' '))) ||
+			(((x == info->mapsize - 1 && info->map[y][x] == ' ' && info->map[y][x - 1] != '1'))))
+			{
+				ft_error_wall_border();
+				return (-1);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
+void	ft_check_map(t_info *info)
+{
+	ft_check_map_char(info);
+	ft_check_boarder(info);
+	ft_check_inside_map(info);
+
+	//int i = 0;
+	//while (info->map[i])
+	//{
+	//	printf("-%s-\n", info->map[i]);
+	//	i++;
+	//}
 }

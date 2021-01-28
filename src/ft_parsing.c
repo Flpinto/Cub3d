@@ -6,11 +6,12 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/06 10:55:58 by flpinto           #+#    #+#             */
-/*   Updated: 2020/11/09 08:42:44 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/01/24 12:37:44 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
 int			ft_check_sp(t_info info, int y)
 {
 	if (info.buff[info.i + y] == ' ' || info.buff[info.i + y] == '\t')
@@ -18,7 +19,7 @@ int			ft_check_sp(t_info info, int y)
 	return (0);
 }
 
-int		ft_init_validator(t_info *info)
+int			ft_init_validator(t_info *info)
 {
 	info->vno = 0;
 	info->vso = 0;
@@ -34,16 +35,16 @@ int		ft_init_validator(t_info *info)
 	info->mapsize = 0;
 	return (0);
 }
+
 t_info		ft_check_data(t_info info, int fd, char *filemap)
-{	
-	
+{
 	if (info.buff[info.i] == 'R' && ft_check_sp(info, 1) == 1)
 		return (ft_get_res(info));
 	if ((info.buff[info.i] == 'F' || info.buff[info.i] == 'C') &&
 			ft_check_sp(info, 1) == 1)
 		return (ft_get_color(info, info.buff[info.i]));
 	if (info.buff[info.i] == 'S' && ft_check_sp(info, 1) == 1)
-		return (ft_parse_sprite(info));	
+		return (ft_parse_sprite(info));
 	if (info.buff[info.i] == 'N' && info.buff[info.i + 1] == 'O' &&
 			ft_check_sp(info, 2) == 1)
 		return (ft_parse_n(info));
@@ -58,10 +59,8 @@ t_info		ft_check_data(t_info info, int fd, char *filemap)
 		return (ft_parse_e(info));
 	if (info.v == 2 && info.vall == 8)
 		return (ft_parse_map(info, fd, filemap));
-	
 	return (info);
 }
-
 
 t_info		ft_parse(int fd, t_info info, char *filemap)
 {
@@ -72,7 +71,7 @@ t_info		ft_parse(int fd, t_info info, char *filemap)
 		info.end = get_next_line(fd, &info.buff);
 		if (info.buff[info.i] && info.end == 1)
 		{
-			while(info.buff[info.i] == ' ' && info.buff[info.i] == '\t')
+			while (info.buff[info.i] == ' ' && info.buff[info.i] == '\t')
 				info.i++;
 			info = ft_check_data(info, fd, filemap);
 			free(info.buff);
@@ -88,11 +87,11 @@ t_info		ft_parse(int fd, t_info info, char *filemap)
 	return (info);
 }
 
-t_info      ft_parse_info(char *filemap, t_info info)
+t_info		ft_parse_info(char *filemap, t_info info)
 {
-	int	 fd;
+	int	fd;
 
-	info. end = 0;
+	info.end = 0;
 	fd = open(filemap, O_RDONLY);
 	if (fd == -1)
 	{

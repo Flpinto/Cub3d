@@ -6,48 +6,53 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 11:45:50 by flpinto           #+#    #+#             */
-/*   Updated: 2021/01/10 15:34:30 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/01/28 16:37:23 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-int     ft_mv_n(int key, t_all *all)
+int		ft_cw(t_all *all, double y, double x)
 {
-    if (key == TOP)
-    {
-        if (all->info->map[(int)all->info->pos_y][(int)(all->info->pos_x + all->info->dirx * 2 * 0.1)] != '1')
-            all->info->pos_x = all->info->pos_x + all->info->dirx * 0.1;
-        if (all->info->map[(int)(all->info->pos_y + all->info->diry * 2 * 0.1)][(int)(all->info->pos_x)] != '1')
-            all->info->pos_y = all->info->pos_y + all->info->diry * 0.1;
-    }
-    if (key == BOT)
-    {
-        if (all->info->map[(int)all->info->pos_y][(int)(all->info->pos_x - all->info->dirx * 2 * 0.1)] != '1')
-            all->info->pos_x = all->info->pos_x - all->info->dirx * 0.1;
-        if (all->info->map[(int)(all->info->pos_y - all->info->diry * 2 * 0.1)][(int)(all->info->pos_x)] != '1')
-            all->info->pos_y = all->info->pos_y - all->info->diry * 0.1;
-    }
-    if (key == RIGHT)
-    {
-        if (all->info->map[(int)all->info->pos_y][(int)(all->info->pos_x + all->info->planex * 2 * 0.1)] != '1')
-            all->info->pos_x = all->info->pos_x + all->info->planex * 0.1;
-        if (all->info->map[(int)(all->info->pos_y + all->info->planey * 2 * 0.1)][(int)(all->info->pos_x)] != '1')
-            all->info->pos_y = all->info->pos_y + all->info->planey * 0.1;
-    }
-    if (key == LEFT)
-    {
-        if (all->info->map[(int)all->info->pos_y][(int)(all->info->pos_x - all->info->planex * 2 * 0.1)] != '1')
-            all->info->pos_x = all->info->pos_x - all->info->planex * 0.1;
-        if (all->info->map[(int)(all->info->pos_y - all->info->planey * 2 * 0.1)][(int)(all->info->pos_x)] != '1')
-            all->info->pos_y = all->info->pos_y - all->info->planey * 0.1;
-    }
-    return (0);
+	int i;
+
+	i = 0;
+	if ((int)y < all->info->maplen - 1 && (int)y > 0)
+		i++;
+	if ((int)x < all->info->mapsize - 2 && (int)x > 0)
+		i++;
+	return(i);
 }
 
-int     ft_move_in_map(int key, t_all *all)
+void	ft_move_tb(int key, t_all *all)
 {
-
-    ft_mv_n(key, all);
-    return (0);
+	if (key == TOP && ft_cw(all, (all->info->pos_y + all->info->diry * 0.1),
+	(all->info->pos_x + all->info->dirx  * 0.1)) == 2)
+	{
+		all->info->pos_x = all->info->pos_x + all->info->dirx * 0.1;
+		all->info->pos_y = all->info->pos_y + all->info->diry * 0.1;
+	}
+	if (key == BOT && ft_cw(all, (all->info->pos_y - all->info->diry * 0.1),
+	(all->info->pos_x - all->info->dirx  * 0.1)) == 2)
+	{
+		all->info->pos_x = all->info->pos_x - all->info->dirx * 0.1;
+		all->info->pos_y = all->info->pos_y - all->info->diry * 0.1;
+	}
 }
+
+void	ft_move_rl(int key, t_all *all)
+{
+	if (key == RIGHT && ft_cw(all, (all->info->pos_y + all->info->planey
+	 * 0.1), (all->info->pos_x + all->info->planex *0.1)) == 2)
+	{
+		all->info->pos_x = all->info->pos_x + all->info->planex * 0.1;
+		all->info->pos_y = all->info->pos_y + all->info->planey * 0.1;
+	}
+	if (key == LEFT && ft_cw(all, (all->info->pos_y - all->info->planey
+	* 0.1), (all->info->pos_x - all->info->planex * 0.1)) == 2)
+	{
+		all->info->pos_x = all->info->pos_x - all->info->planex * 0.1;
+		all->info->pos_y = all->info->pos_y - all->info->planey * 0.1;
+	}
+}
+

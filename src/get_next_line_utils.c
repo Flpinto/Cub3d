@@ -6,13 +6,13 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:14:34 by flpinto           #+#    #+#             */
-/*   Updated: 2020/06/05 11:29:24 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/01/23 12:51:29 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/get_next_line.h"
 
-size_t	ft_strlenz(const char *str)
+size_t		ft_strlenz(const char *str)
 {
 	size_t count;
 
@@ -24,7 +24,7 @@ size_t	ft_strlenz(const char *str)
 	return (count);
 }
 
-char	*ft_strcpy(char *dest, char *src)
+char		*ft_strcpy(char *dest, char *src)
 {
 	unsigned int i;
 
@@ -38,7 +38,7 @@ char	*ft_strcpy(char *dest, char *src)
 	return (dest);
 }
 
-char			*ft_join(char *s1, char *s2, size_t len)
+char		*ft_join(char *s1, char *s2, size_t len)
 {
 	char			*str;
 	char			*tmp;

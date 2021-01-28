@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   ft_error_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/17 10:04:56 by flpinto           #+#    #+#             */
-/*   Updated: 2019/10/28 16:06:32 by flpinto          ###   ########.fr       */
+/*   Created: 2021/01/24 12:15:24 by flpinto           #+#    #+#             */
+/*   Updated: 2021/01/26 23:10:16 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cube3d.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+int		ft_check_stpos(char c)
 {
-	unsigned int	i;
-	char			*nstr;
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
+}
 
-	if (!s || !f)
-		return (NULL);
-	i = 0;
-	nstr = ft_strdup(s);
-	if (!nstr)
-		return (NULL);
-	while (nstr[i])
-	{
-		nstr[i] = (*f)(i, nstr[i]);
-		i++;
-	}
-	nstr[i] = '\0';
-	return (nstr);
+int		ft_check_char(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W' ||
+	c == ' ' || c == '0' ||c == '1' || c == '2')
+		return (1);
+	return (0);
+}
+
+void		ft_error_wall_border(void)
+{
+	printf("Error : hole on border's wall\n");
 }

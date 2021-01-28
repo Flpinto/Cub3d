@@ -6,13 +6,13 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:18:57 by flpinto           #+#    #+#             */
-/*   Updated: 2020/11/09 12:19:24 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/01/28 17:17:25 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-char	    *ft_strdel(char *s)
+char		*ft_strdel(char *s)
 {
 	if (s != NULL)
 	{
@@ -20,44 +20,49 @@ char	    *ft_strdel(char *s)
 		free(s);
 		s = NULL;
 	}
-    return (s);
+	return (s);
 }
 
-t_info      *ft_destroy_map(t_info *info)
+void		ft_destroy_map(t_info *info)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (info->map[i])
-    {
-        info->map[i] = ft_strdel(info->map[i]);
-        i++;
-    }
-    return (info);
+	i = 0;
+	while (info->map[i])
+	{
+		free(info->map[i]);
+		i++;
+	}
+	free(info->map);
 }
-/*
-t_game    *ft_destroy_game(t_game *game)
+
+void		ft_destroy_img(t_all *all)
 {
-    game->win = NULL;
-    free(game->win);
-    game->mlx = NULL;
-    free(game->mlx);
-    return (game);
+	int i;
+
+	mlx_destroy_image(all->game->mlx, all->img->img);
+	i = 0;
+	while (all->img->addr[i])
+	{
+		all->img->addr[i] = NULL;
+		free(all->img->addr[i]);
+		i++;
+	}
 }
-*/
-t_info      *ft_destroy_info(t_info *info)
+t_info		*ft_destroy_info(t_info *info)
 {
-    ft_strdel(info->texture_n);
-    ft_strdel(info->texture_w);
-    ft_strdel(info->texture_e);
-    ft_strdel(info->texture_s);
-    ft_strdel(info->texture_sprite);
-    info = ft_destroy_map(info);
-    return (info);
+	ft_strdel(info->texture_n);
+	ft_strdel(info->texture_w);
+	ft_strdel(info->texture_e);
+	ft_strdel(info->texture_s);
+	ft_strdel(info->texture_sprite);
+	ft_destroy_map(info);
+	return (info);
 }
-int         ft_destroy_all(t_all *all)
+
+int			ft_destroy_all(t_all *all)
 {
-    all->info = ft_destroy_info(all->info);
-    //all.game = ft_destroy_game(all.game);
-    return (0);
+	ft_destroy_info(all->info);
+	ft_destroy_img(all);
+	return (0);
 }
