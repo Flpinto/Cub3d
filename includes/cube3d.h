@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:21:45 by flpinto           #+#    #+#             */
-/*   Updated: 2021/01/28 16:28:50 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/02/02 11:36:19 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ typedef struct      s_all
 	t_sprite    *sprite;
 }                   t_all;
 
-t_all		ft_run_game(t_all all);
+t_all		ft_run_game(t_all all, int argc, char *argv);
 t_info		ft_parse_info(char *filemap, t_info info);
 t_info		ft_get_res(t_info info);
 t_info		ft_get_color(t_info info, char c);
@@ -205,11 +205,14 @@ t_info		ft_parse_n(t_info info);
 t_info		ft_parse_w(t_info info);
 t_info		ft_parse_e(t_info info);
 t_info		ft_parse_sprite(t_info info);
-void		ft_error_wall_border(void);
+int			ft_error_wall_border(void);
 t_info		ft_parse_map(t_info info, int fd, char *filemap);
 t_info		ft_get_map(t_info info, int fd);
 int			ft_destroy_all(t_all *all);
-void		ft_check_map(t_info *info);
+int			ft_check_map(t_info *info);
+t_info		*ft_destroy_info(t_info *info);
+int			ft_error_hole(void);
+int			ft_error_char(void);
 t_data		ft_get_img_by_file(t_data img, t_all all);
 int			ft_check_first_line(char *line);
 int			ft_check_stpos(char c);
@@ -236,5 +239,7 @@ int			ft_cw(t_all *all, double y, double x);
 void		ft_move_tb(int key, t_all *all);
 void		ft_move_rl(int key, t_all *all);
 void		ft_size_window(t_all *all);
+int			ft_check_extension(char *filemap);
+void		ft_save(char *data, t_all *all, int ac, char *av);
 
 # endif

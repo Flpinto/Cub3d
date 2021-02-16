@@ -6,20 +6,38 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 17:02:35 by flpinto           #+#    #+#             */
-/*   Updated: 2021/01/28 18:14:37 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/02/02 11:36:03 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
+void		ft_init_key(t_all *all)
+{
+	all->info->key[TOP] = 0;
+	all->info->key[BOT] = 0;
+	all->info->key[LEFT] = 0;
+	all->info->key[RIGHT] = 0;
+	all->info->key[RLEFT] = 0;
+	all->info->key[RRIGHT] = 0;
+	all->info->key[ESC] = 0;
+}
+
 void		ft_init_pos(t_all *all)
 {
 	all->info->pos_x = 0;
 	all->info->pos_y = 0;
+	all->info->dirx = 0;
+	all->info->diry = -1;
+	all->info->planex = 0;
+	all->info->planey = 0.66;
 	ft_init_direction(all);
+	ft_init_key(all);
+	ft_init_sprite(all);
+
 }
 
-t_all		ft_run_game(t_all all)
+t_all		ft_run_game(t_all all, int argc, char *argv)
 {
 	t_game		game;
 	t_data		img;
@@ -37,7 +55,8 @@ t_all		ft_run_game(t_all all)
 	all.info->res_y);
 	img = ft_get_img_by_file(img, all);
 	ft_init_pos(&all);
-	ft_ray(&all);	
+	ft_ray(&all);
+	ft_save(img.addr[0], &all, argc, argv);
 	mlx_put_image_to_window(game.mlx, game.win, img.img[0], 0, 0);
 	mlx_hook(all.game->win, 33, 1L << 17, (*ft_exit_game), &all);
 	mlx_hook(all.game->win, 2, 1L << 0, (*ft_keypress), &all);

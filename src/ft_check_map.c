@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 18:28:56 by flpinto           #+#    #+#             */
-/*   Updated: 2021/01/28 15:55:58 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/02/01 11:06:07 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,19 @@ int			ft_check_map_char(t_info *info)
 			if (ft_check_stpos(info->map[y][x]) == 1)
 				stpos++;
 			if (ft_check_char(info->map[y][x]) != 1)
-				printf("Error : -%c- Wrong map character\n", info->map[y][x]);
+				return (ft_error_char());
+			if (info->map[y][x] == ' ')
+				info->map[y][x] = '1';
 			x++;
 		}
 		y++;
 	}
-	if (stpos > 1)
-		printf("Error : multiple start-position\n");
-	if (stpos < 1)
-		printf("Error : no start-position\n");
+	if (stpos > 1 || stpos < 1)
+	{
+		printf("Error : Bad start-position\n");
+		return (-1);
+	}
 	return (0);
-}
-
-void		ft_error_hole(void)
-{
-	printf("Error : Dangerous void in map\n");
 }
 
 int			ft_check_inside_map(t_info *info)
@@ -57,16 +55,12 @@ int			ft_check_inside_map(t_info *info)
 		x = 1;
 		while (info->map[y][x] && x < info->mapsize - 1)
 		{
-			if (info->map[y][x] == ' ' && ((info->map[y][x + 1] != '1' || info->map[y][x + 1] != ' ') && (info->map[y][x - 1] != '1' || info->map[y][x - 1] != ' ')))
-			{
-				ft_error_hole();
-				return (-1);
-			}/*
-			if (info->map[y][x] == ' ' && ((info->map[y + 1][x] != '1' || info->map[y + 1][x] != ' ') && (info->map[y - 1][x] != '1' || info->map[y - 1][x] != ' ')))
-			{
-				ft_error_hole();
-				return (-1);
-			}*/
+			if (info->map[y][x] == ' ' && ((info->map[y][x + 1] != '1' &&
+			info->map[y][x + 1] != ' ') && (info->map[y][x - 1] != '1' && info->map[y][x - 1] != ' ')))
+				return (ft_error_hole());
+			if (info->map[y][x] == ' ' && ((info->map[y + 1][x] != '1' &&
+			info->map[y + 1][x] != ' ') && (info->map[y - 1][x] != '1' && info->map[y - 1][x] != ' ')))
+				return (ft_error_hole());
 			x++;
 		}
 		y++;
@@ -86,22 +80,9 @@ int			ft_check_boarder(t_info *info)
 		while (info->map[y][x])
 		{
 			if ((y == 0 || y == info->maplen - 1) && (info->map[y][x] != '1' && info->map[y][x] != ' '))
-			{
-				ft_error_wall_border();
-				return (-1);
-			}
-			if ((x == 0 || x == info->mapsize - 1) &&
-			(info->map[y][x] != '1' && info->map[y][x] != ' '))
-			{
-				ft_error_wall_border();
-				return (-1);
-			}
-			if (((x == 0 && info->map[y][x] == ' ' && (info->map[y][x + 1] != '1' && info->map[y][x + 1] != ' '))) ||
-			(((x == info->mapsize - 1 && info->map[y][x] == ' ' && info->map[y][x - 1] != '1'))))
-			{
-				ft_error_wall_border();
-				return (-1);
-			}
+				return (ft_error_wall_border());
+			if ((x == 0 || x == info->mapsize - 1) && info->map[y][x] != '1' && info->map[y][x] != ' ')
+				return (ft_error_wall_border());
 			x++;
 		}
 		y++;
@@ -109,16 +90,23 @@ int			ft_check_boarder(t_info *info)
 	return (0);
 }
 
-void	ft_check_map(t_info *info)
+void	ft_end_pre(t_info *info)
 {
-	ft_check_map_char(info);
-	ft_check_boarder(info);
-	ft_check_inside_map(info);
-
-	//int i = 0;
-	//while (info->map[i])
-	//{
-	//	printf("-%s-\n", info->map[i]);
-	//	i++;
-	//}
+	ft_destroy_info(info);
+	exit(0);
+}
+int		ft_check_map(t_info *info)
+{
+	if (!info->map)
+	{
+		write(1, "Error parsing\n", 14);
+		ft_end_pre(info);
+	}
+	if (ft_check_map_char(info) == -1)
+		ft_end_pre(info);
+	if (ft_check_boarder(info) == -1)
+		ft_end_pre(info);
+	if (ft_check_inside_map(info) == -1)
+		ft_end_pre(info);
+	return (0);
 }

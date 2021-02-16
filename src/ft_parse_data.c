@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 15:37:16 by flpinto           #+#    #+#             */
-/*   Updated: 2021/01/28 16:07:07 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/01/31 16:17:04 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ int		ft_free_tab(t_info *info)
 	i = 0;
 	while (info->tab[i])
 	{
-		info->tab[i] = NULL;
 		free(info->tab[i]);
 		i++;
 	}
-	info->tab = NULL;
 	free(info->tab);
 	return (0);
 }

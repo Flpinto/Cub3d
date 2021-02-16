@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 17:03:59 by flpinto           #+#    #+#             */
-/*   Updated: 2021/01/25 08:59:14 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/02/01 10:38:20 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int			ft_check_line_map(t_info info)
 
 	len = 0;
 	count = 0;
-	while (info.buff[len] == '1' || info.buff[len] == ' ')
+	while (info.buff[len] == '1' || info.buff[len] == ' ' ||
+	info.buff[len] == '\t')
 	{
 		if (info.buff[len] == '1')
 			count = 1;
@@ -53,7 +54,7 @@ t_info		ft_return_to_map(t_info info, int fd, char *filemap)
 
 t_info		ft_get_map_len(t_info info, int fd, char *filemap)
 {
-	while (info.buff[0] == '1' || info.buff[0] == ' ')
+	while (info.buff[0] == '1' || info.buff[0] == ' ' || info.buff[0] == '\t')
 	{
 		info.maplen++;
 		info.i = 0;
@@ -79,8 +80,5 @@ t_info		ft_parse_map(t_info info, int fd, char *filemap)
 {
 	if (info.maplen == 0)
 		info = ft_get_map_len(info, fd, filemap);
-	/*
-	ft_check_map(info);
-	*/
 	return (info);
 }

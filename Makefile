@@ -1,12 +1,12 @@
 OS := $(shell uname)
 
-BINARY = Cub3D
+NAME = Cub3D
 
 LIBFT = ./libft/libft.a
 LIBFT_SRC := $(wildcard libft/*.c)
 LIBFT_OBJ := $(patsubst libft/%.c, libft/%.o, $(LIBFT_SRC))
 
-COMP = gcc -Wall -Wextra -Werror -g3 #-g3 -fsanitize=address
+CC = @gcc  -Wall -Wextra -Werror
 
 #INCLUDES = -Iincludes -I/usr/local/include/ -Llibft -lft -lm -L/usr/local/lib/ -framework OpenGL -framework AppKit
 
@@ -16,51 +16,38 @@ INCLUDES = -Iincludes -I/usr/local/include/ -Llibft -lft -lm -L/usr/local/lib/ -
 SRC := $(wildcard src/*.c)
 OBJ := $(patsubst src/%.c, obj/%.o, $(SRC))
 
-GREEN = \e[1m\e[32m
-RESET = \e[0m
-
 MLX = ./mlx/libmlx.a
 
-all: $(BINARY)
+all: $(NAME)
 
-$(BINARY): $(LIBFT) $(MLX) $(OBJ)
-	@echo -e "$(GREEN)==> Making Cub3D$(RESET)"
-	$(COMP) $(OBJ) $(MLX) $(LIBFT) -o $(BINARY) $(INCLUDES)
+$(NAME): $(LIBFT) $(MLX) $(OBJ)
+	@echo -e "Compiling Cub3D"
+	@$(CC) $(OBJ) $(MLX) $(LIBFT) -o $(NAME) $(INCLUDES)
 
 $(LIBFT): $(LIBFT_OBJ)
-	@echo -e "$(GREEN)==> Making LIBFT$(RESET)"
-	ar rcs $(LIBFT) $(LIBFT_OBJ)
+	@echo "----Compiling LIBFT----"
+	@ar rcs $(LIBFT) $(LIBFT_OBJ)
 
 libft/%.o: libft/%.c
-	$(COMP) -Iincludes -c $< -o $@
+	@$(CC) -Iincludes -c $< -o $@
 
 obj/%.o: src/%.c
-	mkdir -p obj
-	$(COMP) -Iincludes -c $< -o $@
-
-run: $(BINARY)
-	@echo -e "$(GREEN)==> Running binary$(RESET)"
-	@./$(BINARY) ./res/map1.cub
-
-runs: $(BINARY)
-	@echo -e "$(GREEN)==> Running binary with -save arg$(RESET)"
-	@./$(BINARY) ./res/map1.cub -save
+	@mkdir -p obj
+	@$(CC) -Iincludes -c $< -o $@
 
 $(MLX):
-	@echo -e "$(GREEN)==> Making MLX$(RESET)"
-	make -C ./mlx
-
-norme:
-	#grep "printf" */*.[ch]
-	norminette src/*
+	@echo "----Compiling MLX----"
+	@make -C ./mlx
 
 clean:
-	rm -rf libft/*.o obj/* mlx/*.o
-	rm -rf screenshot.bmp
+	@echo "----Clean obj----"
+	@rm -rf libft/*.o obj/* mlx/*.o
+	@rm -rf screenshot.bmp
 
 fclean: clean
-	rm -rf $(BINARY) *.dSYM $(LIBFT)
-	make -C ./mlx clean
+	@echo "----Clean libs and Cub3D----"
+	@rm -rf $(NAME) *.dSYM $(LIBFT)
+	@make -C ./mlx clean
 
 re: fclean all
 

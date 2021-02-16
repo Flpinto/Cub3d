@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 11:28:16 by flpinto           #+#    #+#             */
-/*   Updated: 2021/01/28 16:20:36 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/02/01 09:29:52 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int		ft_keypress(int key, t_all *all)
 
 int		ft_keyrelease(int key, t_all *all)
 {
-	key = key;
 	all->info->key[key] = 0;
 	return (0);
 }

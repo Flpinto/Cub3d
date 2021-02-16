@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:50:53 by flpinto           #+#    #+#             */
-/*   Updated: 2021/01/24 10:32:41 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/02/01 17:03:48 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,10 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	unsigned char		*ptr;
+	char	*t;
 
-	if (count == 0 || size == 0)
-	{
-		count = 1;
-		size = 1;
-	}
-	if (!(ptr = (unsigned char *)malloc(sizeof(unsigned char) * count)))
+	if (!(t = (void *)malloc(count * size)))
 		return (NULL);
-	ft_memset(ptr, 0, count * size);
-	return ((void *)ptr);
+	ft_memset(t, 0, count * size);
+	return (t);
 }

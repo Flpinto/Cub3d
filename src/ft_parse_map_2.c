@@ -6,49 +6,49 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 15:37:13 by flpinto           #+#    #+#             */
-/*   Updated: 2021/01/25 15:05:04 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/02/02 09:20:30 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-char	*ft_strlcpy_fill_map(const char *src, size_t dstsize)
+char	*ft_strlcpy_fill_map(const char *src, char *dest, size_t dstsize)
 {
 	size_t	a;
-	char	*dest;
+
 	a = 0;
-	if (!src)
-		return (NULL);
-	if (dstsize > 0)
+	while (src[a])
 	{
-		dest = malloc(sizeof(char *) * dstsize);
-		while (src[a])
-		{
-			dest[a] = src[a];
-			a++;
-		}
-		while (a < dstsize)
-		{
-			dest[a] = ' ';
-			a++;
-		}
-		dest[a] = '\0';
+		dest[a] = src[a];
+		a++;
 	}
+	while (a < dstsize)
+	{
+		dest[a] = ' ';
+		a++;
+	}
+	dest[a] = '\0';
 	return (dest);
 }
 
 t_info	ft_get_map(t_info info, int fd)
 {
 	info.i = 0;
-	if (!(info.map = malloc(sizeof(char *) * info.maplen + 1)))
+	info.map = ft_calloc(info.maplen * 2, sizeof(char *));
+	if (!info.map)
 	{
 		info.v = 0;
-		write(1, "ERRORO MALLOC MAP\n", 18);
 		return (info);
 	}
 	while (info.i < info.maplen)
 	{
-		info.map[info.i] = ft_strlcpy_fill_map(info.buff, info.mapsize);
+		info.map[info.i] = malloc(sizeof(char *) * info.mapsize * 2);
+		if (!info.map[info.i])
+		{
+			info.v = 0;
+			return (info);
+		}
+		info.map[info.i] = ft_strlcpy_fill_map(info.buff, info.map[info.i], info.mapsize);
 		info.i++;
 		free(info.buff);
 		get_next_line(fd, &info.buff);

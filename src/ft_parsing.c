@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/06 10:55:58 by flpinto           #+#    #+#             */
-/*   Updated: 2021/01/24 12:37:44 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/02/01 15:34:13 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int			ft_init_validator(t_info *info)
 	info->vso = 0;
 	info->vwe = 0;
 	info->vea = 0;
+	info->vsp = 0;
 	info->vs = 0;
 	info->vf = 0;
 	info->vc = 0;
@@ -33,6 +34,7 @@ int			ft_init_validator(t_info *info)
 	info->vall = 0;
 	info->maplen = 0;
 	info->mapsize = 0;
+	info->tab = NULL;
 	return (0);
 }
 
@@ -66,12 +68,12 @@ t_info		ft_parse(int fd, t_info info, char *filemap)
 {
 	info.i = 0;
 	info.end = 1;
-	while (info.end == 1)
+	while (info.end == 1 && info.v != 0)
 	{
 		info.end = get_next_line(fd, &info.buff);
 		if (info.buff[info.i] && info.end == 1)
 		{
-			while (info.buff[info.i] == ' ' && info.buff[info.i] == '\t')
+			while (info.buff[info.i] == ' ' || info.buff[info.i] == '\t')
 				info.i++;
 			info = ft_check_data(info, fd, filemap);
 			free(info.buff);
@@ -81,7 +83,9 @@ t_info		ft_parse(int fd, t_info info, char *filemap)
 	}
 	if (info.v == 0)
 	{
-		write(1, "Error data\n", 12);
+		write(1, "Error parsing\n", 14);
+		ft_destroy_info(&info);
+		close(fd);
 		exit(0);
 	}
 	return (info);
@@ -93,9 +97,9 @@ t_info		ft_parse_info(char *filemap, t_info info)
 
 	info.end = 0;
 	fd = open(filemap, O_RDONLY);
-	if (fd == -1)
+	if (fd == -1 || ft_check_extension(filemap) == -1)
 	{
-		write(1, "wrong files\n", 10);
+		write(1, "Error file\n", 11);
 		exit(0);
 	}
 	ft_init_validator(&info);
