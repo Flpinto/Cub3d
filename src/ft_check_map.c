@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 18:28:56 by flpinto           #+#    #+#             */
-/*   Updated: 2021/02/01 11:06:07 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/02/23 11:59:31 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,8 @@ int			ft_check_map_char(t_info *info)
 		}
 		y++;
 	}
-	if (stpos > 1 || stpos < 1)
-	{
-		printf("Error : Bad start-position\n");
+	if (ft_check_pos(stpos) == -1)
 		return (-1);
-	}
 	return (0);
 }
 
@@ -51,15 +48,16 @@ int			ft_check_inside_map(t_info *info)
 	y = 1;
 	while (info->map[y] && y < info->maplen - 1)
 	{
-		
 		x = 1;
 		while (info->map[y][x] && x < info->mapsize - 1)
 		{
 			if (info->map[y][x] == ' ' && ((info->map[y][x + 1] != '1' &&
-			info->map[y][x + 1] != ' ') && (info->map[y][x - 1] != '1' && info->map[y][x - 1] != ' ')))
+			info->map[y][x + 1] != ' ') && (info->map[y][x - 1] != '1' &&
+			info->map[y][x - 1] != ' ')))
 				return (ft_error_hole());
 			if (info->map[y][x] == ' ' && ((info->map[y + 1][x] != '1' &&
-			info->map[y + 1][x] != ' ') && (info->map[y - 1][x] != '1' && info->map[y - 1][x] != ' ')))
+			info->map[y + 1][x] != ' ') && (info->map[y - 1][x] != '1' &&
+			info->map[y - 1][x] != ' ')))
 				return (ft_error_hole());
 			x++;
 		}
@@ -79,9 +77,11 @@ int			ft_check_boarder(t_info *info)
 		x = 0;
 		while (info->map[y][x])
 		{
-			if ((y == 0 || y == info->maplen - 1) && (info->map[y][x] != '1' && info->map[y][x] != ' '))
+			if ((y == 0 || y == info->maplen - 1) && (info->map[y][x] != '1' &&
+			info->map[y][x] != ' '))
 				return (ft_error_wall_border());
-			if ((x == 0 || x == info->mapsize - 1) && info->map[y][x] != '1' && info->map[y][x] != ' ')
+			if ((x == 0 || x == info->mapsize - 1) && info->map[y][x] != '1' &&
+			info->map[y][x] != ' ')
 				return (ft_error_wall_border());
 			x++;
 		}
@@ -90,12 +90,7 @@ int			ft_check_boarder(t_info *info)
 	return (0);
 }
 
-void	ft_end_pre(t_info *info)
-{
-	ft_destroy_info(info);
-	exit(0);
-}
-int		ft_check_map(t_info *info)
+int			ft_check_map(t_info *info)
 {
 	if (!info->map)
 	{

@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:21:45 by flpinto           #+#    #+#             */
-/*   Updated: 2021/02/02 11:36:19 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/02/23 11:58:41 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <math.h>
 # include <fcntl.h>
 #include "get_next_line.h"
-#include "../libft/libft.h"
+#include "../libft/inc/libft.h"
 #include "../mlx/mlx.h"
 # define ESC 65307
 # define TOP 119
@@ -216,6 +216,8 @@ int			ft_error_char(void);
 t_data		ft_get_img_by_file(t_data img, t_all all);
 int			ft_check_first_line(char *line);
 int			ft_check_stpos(char c);
+int			ft_check_pos(int stpos);
+void		ft_end_pre(t_info *info);
 int			ft_check_char(char c);
 int			ft_check_tex_view(t_ray *ray);
 void		ft_print_sprite(t_all *all, t_ray *ray, int x, int y);
@@ -228,6 +230,7 @@ void		ft_chek_number_sprite(t_all *all);
 void		ft_sprite_calcul(t_all *all, t_ray *ray, int w, int h);
 int			ft_ray(t_all *all);
 void		ft_loop(t_all *all);
+void		ft_init_pos(t_all *all);
 void		ft_move_cam_left(t_all *all);
 void		ft_move_cam_right(t_all *all);
 int			ft_exit_game(t_all *all);

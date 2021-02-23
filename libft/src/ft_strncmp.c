@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/12 09:08:39 by flpinto           #+#    #+#             */
-/*   Updated: 2021/02/17 17:22:15 by flpinto          ###   ########.fr       */
+/*   Created: 2019/10/14 10:49:26 by flpinto           #+#    #+#             */
+/*   Updated: 2021/02/16 12:03:37 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "../inc/libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-#include "../libft/inc/libft.h"
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t i;
 
-# define MAX 1024
-# define BUFFER_SIZE 1024
-
-int			get_next_line(int fd, char **line);
-size_t	    ft_strlenz(const char *str);
-char		*ft_strcpy(char *dest, char *src);
-char		*ft_join(char *s1, char *s2, size_t len);
-
-#endif
+	i = 0;
+	while (i < n - 1 && s1[i] == s2[i] && s1[i] && s2[i])
+		i++;
+	if (n > 0)
+		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	else
+		return (0);
+}

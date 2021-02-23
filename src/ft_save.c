@@ -6,53 +6,53 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 11:27:40 by flpinto           #+#    #+#             */
-/*   Updated: 2021/02/16 09:38:38 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/02/23 11:46:04 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-char		*file_header_bmp(int filesize, t_all *all)
+char		*file_header_bmp(int size, t_all *all)
 {
-	char	*bmpfileheader;
+	char	*fileheader;
 
-	if (!(bmpfileheader = (char*)malloc(14 * sizeof(char))))
+	if (!(fileheader = (char*)malloc(14 * sizeof(char))))
 	{
 		write(1, "error malloc\n", 11);
 		ft_destroy_all(all);
 		exit(0);
 	}
-	ft_memcpy(bmpfileheader, (char[]) {'B', 'M', 0, 0, 0, 0, 0, 0, 0, 0, 54,
+	ft_memcpy(fileheader, (char[]) {'B', 'M', 0, 0, 0, 0, 0, 0, 0, 0, 54,
 			0, 0, 0}, 14);
-	bmpfileheader[2] = (char)(filesize);
-	bmpfileheader[3] = (char)(filesize >> 8);
-	bmpfileheader[4] = (char)(filesize >> 16);
-	bmpfileheader[5] = (char)(filesize >> 24);
-	return (bmpfileheader);
+	fileheader[2] = (char)(size);
+	fileheader[3] = (char)(size >> 8);
+	fileheader[4] = (char)(size >> 16);
+	fileheader[5] = (char)(size >> 24);
+	return (fileheader);
 }
 
 char		*info_header_bmp(t_all *all)
 {
-	char	*bmpinfoheader;
+	char	*infoheader;
 
-	if (!(bmpinfoheader = (char*)malloc(40 * sizeof(char))))
+	if (!(infoheader = (char*)malloc(40 * sizeof(char))))
 	{
 		write(1, "error malloc\n", 11);
 		ft_destroy_all(all);
 		exit(0);
 	}
-	ft_memcpy(bmpinfoheader, (char[]) {40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+	ft_memcpy(infoheader, (char[]) {40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
 			0, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0}, 40);
-	bmpinfoheader[4] = (char)(all->info->res_x);
-	bmpinfoheader[5] = (char)(all->info->res_x >> 8);
-	bmpinfoheader[6] = (char)(all->info->res_x >> 16);
-	bmpinfoheader[7] = (char)(all->info->res_x >> 24);
-	bmpinfoheader[8] = (char)(all->info->res_y);
-	bmpinfoheader[9] = (char)(all->info->res_y >> 8);
-	bmpinfoheader[10] = (char)(all->info->res_y >> 16);
-	bmpinfoheader[11] = (char)(all->info->res_y >> 24);
-	return (bmpinfoheader);
+	infoheader[4] = (char)(all->info->res_x);
+	infoheader[5] = (char)(all->info->res_x >> 8);
+	infoheader[6] = (char)(all->info->res_x >> 16);
+	infoheader[7] = (char)(all->info->res_x >> 24);
+	infoheader[8] = (char)(all->info->res_y);
+	infoheader[9] = (char)(all->info->res_y >> 8);
+	infoheader[10] = (char)(all->info->res_y >> 16);
+	infoheader[11] = (char)(all->info->res_y >> 24);
+	return (infoheader);
 }
 
 void		write_data(int f, char *data, t_all *all)
@@ -66,21 +66,21 @@ void		write_data(int f, char *data, t_all *all)
 
 void		ft_save(char *data, t_all *all, int ac, char *av)
 {
-	int				filesize;
+	int				size;
 	int				f;
-	char			*bmpfileheader;
-	char			*bmpinfoheader;
+	char			*fileheader;
+	char			*infoheader;
 
 	if (ac == 3 && ft_strncmp(av, "--save", 6) == 0)
 	{
-		filesize = 14 + 40 + 3 * all->info->res_x * all->info->res_y;
-		f = open("screenshot.bmp", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0755);
-		bmpfileheader = file_header_bmp(filesize, all);
-		write(f, bmpfileheader, 14);
-		free(bmpfileheader);
-		bmpinfoheader = info_header_bmp(all);
-		write(f, bmpinfoheader, 40);
-		free(bmpinfoheader);
+		size = 14 + 40 + 3 * all->info->res_x * all->info->res_y;
+		f = open("save.bmp", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0755);
+		fileheader = file_header_bmp(size, all);
+		write(f, fileheader, 14);
+		free(fileheader);
+		infoheader = info_header_bmp(all);
+		write(f, infoheader, 40);
+		free(infoheader);
 		write_data(f, data, all);
 		close(f);
 		ft_destroy_all(all);

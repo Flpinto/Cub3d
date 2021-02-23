@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_check_map_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/12 09:08:39 by flpinto           #+#    #+#             */
-/*   Updated: 2021/02/17 17:22:15 by flpinto          ###   ########.fr       */
+/*   Created: 2021/02/23 11:56:06 by flpinto           #+#    #+#             */
+/*   Updated: 2021/02/23 11:58:21 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "cube3d.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-#include "../libft/inc/libft.h"
+void		ft_end_pre(t_info *info)
+{
+	ft_destroy_info(info);
+	exit(0);
+}
 
-# define MAX 1024
-# define BUFFER_SIZE 1024
-
-int			get_next_line(int fd, char **line);
-size_t	    ft_strlenz(const char *str);
-char		*ft_strcpy(char *dest, char *src);
-char		*ft_join(char *s1, char *s2, size_t len);
-
-#endif
+int			ft_check_pos(int stpos)
+{
+	if (stpos > 1 || stpos < 1)
+	{
+		write(1, "Error : Bad start-position\n", 27);
+		return (-1);
+	}
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 17:02:35 by flpinto           #+#    #+#             */
-/*   Updated: 2021/02/02 11:36:03 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/02/23 11:06:01 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void		ft_init_pos(t_all *all)
 	ft_init_direction(all);
 	ft_init_key(all);
 	ft_init_sprite(all);
-
 }
 
 t_all		ft_run_game(t_all all, int argc, char *argv)
@@ -50,11 +49,11 @@ t_all		ft_run_game(t_all all, int argc, char *argv)
 	all.img = &img;
 	all.game->mlx = mlx_init();
 	ft_size_window(&all);
-	game.win = mlx_new_window(game.mlx, all.info->res_x, all.info->res_y, "Cub3d");
+	game.win = mlx_new_window(game.mlx,
+		all.info->res_x, all.info->res_y, "Cub3d");
 	img.img[0] = mlx_new_image(all.game->mlx, all.info->res_x,
 	all.info->res_y);
 	img = ft_get_img_by_file(img, all);
-	ft_init_pos(&all);
 	ft_ray(&all);
 	ft_save(img.addr[0], &all, argc, argv);
 	mlx_put_image_to_window(game.mlx, game.win, img.img[0], 0, 0);

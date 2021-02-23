@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 15:37:13 by flpinto           #+#    #+#             */
-/*   Updated: 2021/02/02 09:20:30 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/02/23 11:47:07 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ t_info	ft_get_map(t_info info, int fd)
 			info.v = 0;
 			return (info);
 		}
-		info.map[info.i] = ft_strlcpy_fill_map(info.buff, info.map[info.i], info.mapsize);
+		info.map[info.i] = ft_strlcpy_fill_map(info.buff,
+			info.map[info.i], info.mapsize);
 		info.i++;
 		free(info.buff);
 		get_next_line(fd, &info.buff);

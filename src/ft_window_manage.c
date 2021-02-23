@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 11:44:54 by flpinto           #+#    #+#             */
-/*   Updated: 2021/02/01 18:58:47 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/02/23 11:05:10 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ void	ft_size_window(t_all *all)
 		all->info->res_y = y;
 	if (all->info->res_y % 2 != 0)
 		all->info->res_y = -1;
+	ft_init_pos(all);
 }

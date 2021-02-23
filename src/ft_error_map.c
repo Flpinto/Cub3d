@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 12:15:24 by flpinto           #+#    #+#             */
-/*   Updated: 2021/02/01 10:56:43 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/02/23 11:48:06 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		ft_check_stpos(char c)
 int		ft_check_char(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W' ||
-	c == ' ' || c == '0' ||c == '1' || c == '2')
+	c == ' ' || c == '0' || c == '1' || c == '2')
 		return (1);
 	if (c == ' ')
 		c = 1;
@@ -31,17 +31,18 @@ int		ft_check_char(char c)
 
 int		ft_error_char(void)
 {
-	printf("Error : Wrong map character\n");
-	return(-1);
+	write(1, "Error : Wrong map character\n", 28);
+	return (-1);
 }
+
 int		ft_error_wall_border(void)
 {
-	printf("Error : hole on border's wall\n");
+	write(1, "Error : hole on border's wall\n", 30);
 	return (-1);
 }
 
 int		ft_error_hole(void)
 {
-	printf("Error : Dangerous void in map\n");
+	write(1, "Error : Dangerous void in map\n", 30);
 	return (-1);
 }
