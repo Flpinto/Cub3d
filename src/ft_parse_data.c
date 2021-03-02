@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 15:37:16 by flpinto           #+#    #+#             */
-/*   Updated: 2021/01/31 16:17:04 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/02 21:42:30 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,50 @@ int		ft_free_tab(t_info *info)
 	return (0);
 }
 
+int		ft_check_is_numsp(char *s)
+{
+	int j;
+	int i;
+
+	j = 0;
+	i = 0;
+	while (s[j])
+	{
+		if (s[j] == ' ' || ft_isdigit(s[j]) == 1 || s[j] == '\t')
+			j++;
+		else
+			return (-1);
+	}
+	while (s[i] == ' ' || s[i] == '\t')
+		i++;
+	while (ft_isdigit(s[i]) == 1)
+		i++;
+	while (s[i] == ' ' || s[i] == '\t')
+		i++;
+	if (i != j)
+		return (-1);
+	return (0);
+}
+
+int		ft_check_tab(char **tab)
+{
+	int y;
+
+	y = 0;
+	while (tab[y])
+	{
+		if (ft_check_is_numsp(tab[y]) == -1)
+			return (-1);
+		y++;
+	}
+	return (0);
+}
+
 t_info	ft_get_color(t_info info, char c)
 {
 	info.tab = ft_split(info.buff + ++info.i, ',');
-	if (!info.tab[2] || info.tab[3])
+	if (!info.tab[2] || !info.tab[1] || info.tab[3] ||
+	ft_check_tab(info.tab) == -1)
 	{
 		ft_free_tab(&info);
 		info.v = 0;
@@ -60,7 +100,7 @@ t_info	ft_get_res(t_info info)
 	info.i++;
 	info.vr++;
 	info.tab = ft_split(info.buff + info.i, ' ');
-	if (!info.tab[1] || info.tab[2])
+	if (!info.tab[0] || !info.tab[1] || info.tab[2] || ft_check_tab(info.tab) == -1)
 	{
 		ft_free_tab(&info);
 		info.v = 0;

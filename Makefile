@@ -7,7 +7,7 @@ LIBFT_SRC := $(wildcard libft/*.c)
 LIBFT_OBJ := $(patsubst libft/%.c, libft/%.o, $(LIBFT_SRC))
 
 
-CC = gcc  -Wall -Wextra -Werror
+CC = gcc  -Wall -Wextra -Werror -g3 -fsanitize=address
 MAKEFLAGS	+= --no-print-director
 
 #INCLUDES = -Iincludes -I/usr/local/include/ -Llibft -lft -lm -L/usr/local/lib/ -framework OpenGL -framework AppKit

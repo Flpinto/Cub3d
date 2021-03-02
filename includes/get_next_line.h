@@ -15,13 +15,13 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-#include "../libft/inc/libft.h"
+# include "../libft/inc/libft.h"
 
 # define MAX 1024
 # define BUFFER_SIZE 1024
 
 int			get_next_line(int fd, char **line);
-size_t	    ft_strlenz(const char *str);
+size_t		ft_strlenz(const char *str);
 char		*ft_strcpy(char *dest, char *src);
 char		*ft_join(char *s1, char *s2, size_t len);
 

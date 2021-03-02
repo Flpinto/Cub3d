@@ -36,7 +36,5 @@ void	ft_size_window(t_all *all)
 		all->info->res_x = x;
 	if (all->info->res_y > y)
 		all->info->res_y = y;
-	if (all->info->res_y % 2 != 0)
-		all->info->res_y = -1;
 	ft_init_pos(all);
 }

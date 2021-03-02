@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/06 10:55:58 by flpinto           #+#    #+#             */
-/*   Updated: 2021/02/01 15:34:13 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/02 20:34:54 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,19 @@ int			ft_init_validator(t_info *info)
 	info->tab = NULL;
 	return (0);
 }
+int			ft_check_bmap(t_info info)
+{
+	int i;
 
+	i = 0;
+	while (info.buff[i])
+	{
+		if (info.buff[i] != ' ' && info.buff[i] != '\t' && info.buff[i] != '1')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 t_info		ft_check_data(t_info info, int fd, char *filemap)
 {
 	if (info.buff[info.i] == 'R' && ft_check_sp(info, 1) == 1)
@@ -59,8 +71,9 @@ t_info		ft_check_data(t_info info, int fd, char *filemap)
 	if (info.buff[info.i] == 'E' && info.buff[info.i + 1] == 'A' &&
 			ft_check_sp(info, 2) == 1)
 		return (ft_parse_e(info));
-	if (info.v == 2 && info.vall == 8)
+	if (info.v == 2 && info.vall == 8 && ft_check_bmap(info) == 0)
 		return (ft_parse_map(info, fd, filemap));
+	info.v = 0;
 	return (info);
 }
 

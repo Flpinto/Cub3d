@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 17:02:35 by flpinto           #+#    #+#             */
-/*   Updated: 2021/02/23 11:06:01 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/02 12:49:41 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ t_all		ft_run_game(t_all all, int argc, char *argv)
 	all.sprite = &sprite;
 	all.img = &img;
 	all.game->mlx = mlx_init();
-	ft_size_window(&all);
-	game.win = mlx_new_window(game.mlx,
-		all.info->res_x, all.info->res_y, "Cub3d");
 	img.img[0] = mlx_new_image(all.game->mlx, all.info->res_x,
 	all.info->res_y);
 	img = ft_get_img_by_file(img, all);
-	ft_ray(&all);
 	ft_save(img.addr[0], &all, argc, argv);
+	ft_size_window(&all);
+	ft_ray(&all);
+	game.win = mlx_new_window(game.mlx,
+		all.info->res_x, all.info->res_y, "Cub3d");
 	mlx_put_image_to_window(game.mlx, game.win, img.img[0], 0, 0);
 	mlx_hook(all.game->win, 33, 1L << 17, (*ft_exit_game), &all);
 	mlx_hook(all.game->win, 2, 1L << 0, (*ft_keypress), &all);

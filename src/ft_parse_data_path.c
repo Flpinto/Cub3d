@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 16:18:08 by flpinto           #+#    #+#             */
-/*   Updated: 2021/02/01 12:22:13 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/02 21:44:25 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_info	ft_parse_s(t_info info)
 	if (info.vso == 1)
 	{
 		info.v = 0;
-		write(1, "Too many S path \n", 17);
+		write(1, "Too many SO path \n", 17);
 		return (info);
 	}
 	info.vso++;
@@ -40,7 +40,7 @@ t_info	ft_parse_n(t_info info)
 	if (info.vno == 1)
 	{
 		info.v = 0;
-		write(1, "Too many N path \n", 17);
+		write(1, "Too many NO path \n", 17);
 		return (info);
 	}
 	info.vno++;
@@ -64,7 +64,7 @@ t_info	ft_parse_e(t_info info)
 	if (info.vea == 1)
 	{
 		info.v = 0;
-		write(1, "Too many E path \n", 17);
+		write(1, "Too many EA path \n", 17);
 		return (info);
 	}
 	info.vea++;
@@ -88,7 +88,7 @@ t_info	ft_parse_w(t_info info)
 	if (info.vwe == 1)
 	{
 		info.v = 0;
-		write(1, "Too many W path \n", 17);
+		write(1, "Too many WE path \n", 17);
 		return (info);
 	}
 	info.vwe++;
