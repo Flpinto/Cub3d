@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 10:02:36 by flpinto           #+#    #+#             */
-/*   Updated: 2021/03/03 10:09:23 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/03 12:42:31 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,18 @@ t_info		ft_free_tab_c(t_info info)
 	ft_free_tab(&info);
 	info.v = 0;
 	return (info);
+}
+
+int			ft_free_tab(t_info *info)
+{
+	int i;
+
+	i = 0;
+	while (info->tab[i])
+	{
+		free(info->tab[i]);
+		i++;
+	}
+	free(info->tab);
+	return (0);
 }

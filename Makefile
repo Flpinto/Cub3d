@@ -23,7 +23,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(MLX) $(OBJ)
 	@$(CC) $(OBJ) $(MLX) $(LIBFT) -o $(NAME) $(INCLUDES)
-	@echo "\033[0;32m----Cub3d compiled----"
+	@echo "\033[0;32m----Cub3d compiled----\033[0;0m"
 
 $(LIBFT): $(LIBFT_OBJ)
 	@echo "\033[0;36m----Compiling Start----"
@@ -36,6 +36,8 @@ obj/%.o: src/%.c
 $(MLX):
 	@echo "----Compiling MLX----"
 	@$(MAKE) -C ./mlx
+	@echo "\033[0;32m----MLX compiled----"
+
 
 clean:
 	@rm -rf obj/

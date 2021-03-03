@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:21:45 by flpinto           #+#    #+#             */
-/*   Updated: 2021/03/03 10:54:09 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/03 12:35:13 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,8 @@ t_all			ft_run_game(t_all all, int argc, char *argv);
 t_info			ft_parse_info(char *filemap, t_info info);
 t_info			ft_get_res(t_info info);
 t_info			ft_get_color(t_info info, char c);
+t_info			ft_get_color_c(t_info info);
+t_info			ft_get_color_f(t_info info);
 t_info			ft_parse_s(t_info info);
 t_info			ft_parse_n(t_info info);
 t_info			ft_parse_w(t_info info);

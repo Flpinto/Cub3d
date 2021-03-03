@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 16:59:33 by flpinto           #+#    #+#             */
-/*   Updated: 2021/02/01 15:24:11 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/03 11:27:39 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_chek_number_sprite(t_all *all)
 	already = 0;
 	if (spritenum == SPRITE)
 	{
-		write(1, "error to much sprite\n-increase SPRITE\n", 38);
+		ft_putstr_fd("Error : To many sprite ine map", 1);
 		exit(0);
 	}
 	if (all->sprite->restart + all->sprite->count == (SPRITE + 10))

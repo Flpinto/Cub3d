@@ -6,25 +6,11 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 15:37:16 by flpinto           #+#    #+#             */
-/*   Updated: 2021/03/03 10:46:12 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/03 13:06:37 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-
-int		ft_free_tab(t_info *info)
-{
-	int i;
-
-	i = 0;
-	while (info->tab[i])
-	{
-		free(info->tab[i]);
-		i++;
-	}
-	free(info->tab);
-	return (0);
-}
 
 int		ft_check_is_numsp(char *s)
 {
@@ -65,26 +51,44 @@ int		ft_check_tab(char **tab)
 	return (0);
 }
 
-t_info	ft_get_color(t_info info, char c)
+t_info	ft_get_color_c(t_info info)
 {
 	info.tab = ft_split(info.buff + ++info.i, ',');
 	if (!info.tab[2] || !info.tab[1] || info.tab[3] ||
 	ft_check_tab(info.tab) == -1)
 		return (ft_free_tab_c(info));
-	if (c == 'F')
+	info.vc++;
+	if (info.vc > 1 || ft_atoi(info.tab[0]) > 255 ||
+	ft_atoi(info.tab[1]) > 255 || ft_atoi(info.tab[2]) > 255)
 	{
-		info.vf++;
-		info.color_f[0] = ft_atoi(info.tab[0]);
-		info.color_f[1] = ft_atoi(info.tab[1]);
-		info.color_f[2] = ft_atoi(info.tab[2]);
+		ft_putstr_fd("Error : To many C or RGB code not valid\n", 1);
+		return (ft_free_tab_c(info));
 	}
-	if (c == 'C')
+	info.color_c[0] = ft_atoi(info.tab[0]);
+	info.color_c[1] = ft_atoi(info.tab[1]);
+	info.color_c[2] = ft_atoi(info.tab[2]);
+	ft_free_tab(&info);
+	info.vall++;
+	info.i = 0;
+	return (info);
+}
+
+t_info	ft_get_color_f(t_info info)
+{
+	info.tab = ft_split(info.buff + ++info.i, ',');
+	if (!info.tab[2] || !info.tab[1] || info.tab[3] ||
+	ft_check_tab(info.tab) == -1)
+		return (ft_free_tab_c(info));
+	info.vf++;
+	if (info.vf > 1 || ft_atoi(info.tab[0]) > 255 ||
+	ft_atoi(info.tab[1]) > 255 || ft_atoi(info.tab[2]) > 255)
 	{
-		info.vc++;
-		info.color_c[0] = ft_atoi(info.tab[0]);
-		info.color_c[1] = ft_atoi(info.tab[1]);
-		info.color_c[2] = ft_atoi(info.tab[2]);
+		ft_putstr_fd("Error : To many F or RGB code not valid\n", 1);
+		return (ft_free_tab_c(info));
 	}
+	info.color_f[0] = ft_atoi(info.tab[0]);
+	info.color_f[1] = ft_atoi(info.tab[1]);
+	info.color_f[2] = ft_atoi(info.tab[2]);
 	ft_free_tab(&info);
 	info.vall++;
 	info.i = 0;
@@ -100,6 +104,7 @@ t_info	ft_get_res(t_info info)
 	ft_check_tab(info.tab) == -1)
 	{
 		ft_free_tab(&info);
+		ft_putstr_fd("Error : Resolution Not Valid", 1);
 		info.v = 0;
 		return (info);
 	}

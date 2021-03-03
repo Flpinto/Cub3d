@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 16:18:08 by flpinto           #+#    #+#             */
-/*   Updated: 2021/03/02 21:44:25 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/03 12:49:58 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_info	ft_parse_s(t_info info)
 	if (info.vso == 1)
 	{
 		info.v = 0;
-		write(1, "Too many SO path \n", 17);
+		ft_putstr_fd("Error : Too many SO path\n", 1);
 		return (info);
 	}
 	info.vso++;
@@ -27,7 +27,7 @@ t_info	ft_parse_s(t_info info)
 	info.texture_s = ft_strdup(info.buff + info.i);
 	if (open(info.texture_s, O_RDONLY) == -1)
 	{
-		write(1, "Error texture path\n", 19);
+		ft_putstr_fd("Error : SO path not valid\n", 1);
 		info.v = 0;
 	}
 	info.i = 0;
@@ -40,7 +40,7 @@ t_info	ft_parse_n(t_info info)
 	if (info.vno == 1)
 	{
 		info.v = 0;
-		write(1, "Too many NO path \n", 17);
+		ft_putstr_fd("Error : Too many NO path\n", 1);
 		return (info);
 	}
 	info.vno++;
@@ -50,7 +50,7 @@ t_info	ft_parse_n(t_info info)
 	info.texture_n = ft_strdup(info.buff + info.i);
 	if (open(info.texture_n, O_RDONLY) == -1)
 	{
-		write(1, "Error texture path\n", 19);
+		ft_putstr_fd("Error : NO path not valid\n", 1);
 		info.v = 0;
 		return (info);
 	}
@@ -64,7 +64,7 @@ t_info	ft_parse_e(t_info info)
 	if (info.vea == 1)
 	{
 		info.v = 0;
-		write(1, "Too many EA path \n", 17);
+		ft_putstr_fd("Error : Too many EA path\n", 1);
 		return (info);
 	}
 	info.vea++;
@@ -74,7 +74,7 @@ t_info	ft_parse_e(t_info info)
 	info.texture_e = ft_strdup(info.buff + info.i);
 	if (open(info.texture_e, O_RDONLY) == -1)
 	{
-		write(1, "Error texture path\n", 19);
+		ft_putstr_fd("Error : EA path not valid\n", 1);
 		info.v = 0;
 		return (info);
 	}
@@ -88,7 +88,7 @@ t_info	ft_parse_w(t_info info)
 	if (info.vwe == 1)
 	{
 		info.v = 0;
-		write(1, "Too many WE path \n", 17);
+		ft_putstr_fd("Error : Too many WE path\n", 1);
 		return (info);
 	}
 	info.vwe++;
@@ -98,7 +98,7 @@ t_info	ft_parse_w(t_info info)
 	info.texture_w = ft_strdup(info.buff + info.i);
 	if (open(info.texture_w, O_RDONLY) == -1)
 	{
-		write(1, "Error texture path\n", 19);
+		ft_putstr_fd("Error : WE path not valid\n", 1);
 		info.v = 0;
 		return (info);
 	}
@@ -112,7 +112,7 @@ t_info	ft_parse_sprite(t_info info)
 	if (info.vsp == 1)
 	{
 		info.v = 0;
-		write(1, "Too many sprite path\n", 21);
+		ft_putstr_fd("Error : Too many sprite path\n", 1);
 		return (info);
 	}
 	info.vsp++;
@@ -122,7 +122,7 @@ t_info	ft_parse_sprite(t_info info)
 	info.texture_sprite = ft_strdup(info.buff + info.i);
 	if (open(info.texture_sprite, O_RDONLY) == -1)
 	{
-		write(1, "Error sprite path\n", 18);
+		ft_putstr_fd("Error : Sprite path not valid\n", 1);
 		info.v = 0;
 		return (info);
 	}

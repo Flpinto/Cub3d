@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 11:42:36 by flpinto           #+#    #+#             */
-/*   Updated: 2021/03/03 10:56:31 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/03 11:27:47 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		ft_error_text(void)
 {
-	write(1, "Error : Texture not valid\n", 20);
+	ft_putstr_fd("Error : Texture not valid\n", 1);
 	exit(0);
 }
 

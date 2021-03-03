@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/06 10:55:58 by flpinto           #+#    #+#             */
-/*   Updated: 2021/03/03 10:02:21 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/03 13:02:38 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ t_info		ft_check_data(t_info info, int fd, char *filemap)
 {
 	if (info.buff[info.i] == 'R' && ft_check_sp(info, 1) == 1)
 		return (ft_get_res(info));
-	if ((info.buff[info.i] == 'F' || info.buff[info.i] == 'C') &&
-			ft_check_sp(info, 1) == 1)
-		return (ft_get_color(info, info.buff[info.i]));
+	if (info.buff[info.i] == 'F' && ft_check_sp(info, 1) == 1)
+		return (ft_get_color_f(info));
+	if (info.buff[info.i] == 'C' && ft_check_sp(info, 1) == 1)
+		return (ft_get_color_c(info));
 	if (info.buff[info.i] == 'S' && ft_check_sp(info, 1) == 1)
 		return (ft_parse_sprite(info));
 	if (info.buff[info.i] == 'N' && info.buff[info.i + 1] == 'O' &&
@@ -85,7 +86,6 @@ t_info		ft_parse(int fd, t_info info, char *filemap)
 	}
 	if (info.v == 0)
 	{
-		write(1, "Error parsing\n", 14);
 		ft_destroy_info(&info);
 		close(fd);
 		exit(0);
