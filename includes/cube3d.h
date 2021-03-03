@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:21:45 by flpinto           #+#    #+#             */
-/*   Updated: 2021/03/02 21:47:31 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/03 10:54:09 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,6 +228,11 @@ void			ft_sort_sprite(t_all *all);
 void			ft_init_sprite(t_all *all);
 void			ft_chek_number_sprite(t_all *all);
 void			ft_sprite_calcul(t_all *all, t_ray *ray, int w, int h);
+void			ft_error_gnl(t_info *info);
+int				ft_check_bmap(t_info info);
+int				ft_free_tab(t_info *info);
+int				ft_check_around(int x, int y, t_info *info);
+t_info			ft_free_tab_c(t_info info);
 int				ft_ray(t_all *all);
 void			ft_loop(t_all *all);
 void			ft_init_pos(t_all *all);

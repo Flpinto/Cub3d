@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/06 10:55:58 by flpinto           #+#    #+#             */
-/*   Updated: 2021/03/02 20:34:54 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/03 10:02:21 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,7 @@ int			ft_init_validator(t_info *info)
 	info->tab = NULL;
 	return (0);
 }
-int			ft_check_bmap(t_info info)
-{
-	int i;
 
-	i = 0;
-	while (info.buff[i])
-	{
-		if (info.buff[i] != ' ' && info.buff[i] != '\t' && info.buff[i] != '1')
-			return (1);
-		i++;
-	}
-	return (0);
-}
 t_info		ft_check_data(t_info info, int fd, char *filemap)
 {
 	if (info.buff[info.i] == 'R' && ft_check_sp(info, 1) == 1)
@@ -83,7 +71,8 @@ t_info		ft_parse(int fd, t_info info, char *filemap)
 	info.end = 1;
 	while (info.end == 1 && info.v != 0)
 	{
-		info.end = get_next_line(fd, &info.buff);
+		if ((info.end = get_next_line(fd, &info.buff)) == -1)
+			ft_error_gnl(&info);
 		if (info.buff[info.i] && info.end == 1)
 		{
 			while (info.buff[info.i] == ' ' || info.buff[info.i] == '\t')
@@ -110,7 +99,7 @@ t_info		ft_parse_info(char *filemap, t_info info)
 
 	info.end = 0;
 	fd = open(filemap, O_RDONLY);
-	if (fd == -1 || ft_check_extension(filemap) == -1)
+	if (fd <= 0 || ft_check_extension(filemap) == -1)
 	{
 		write(1, "Error file\n", 11);
 		exit(0);

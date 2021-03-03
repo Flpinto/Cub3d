@@ -6,13 +6,13 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 11:42:36 by flpinto           #+#    #+#             */
-/*   Updated: 2021/03/02 21:58:14 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/03 10:56:31 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void		ft_wrong_tex(void)
+void		ft_error_text(void)
 {
 	write(1, "Error : Texture not valid\n", 20);
 	exit(0);
@@ -81,7 +81,7 @@ t_data		ft_get_img_by_file(t_data img, t_all all)
 	img.img[5] = mlx_xpm_file_to_image(all.game->mlx,
 		all.info->texture_sprite, &img.textw[5], &img.texth[5]);
 	while (i++ <= 5)
-		(img.img[i] == 0) ? ft_wrong_tex() : 0;
+		(img.img[i] == 0) ? ft_error_text() : 0;
 	img.frgb = 65536 * all.info->color_f[0] + 256 *
 		all.info->color_f[1] + all.info->color_f[2];
 	img.crgb = 65536 * all.info->color_c[0] + 256 *

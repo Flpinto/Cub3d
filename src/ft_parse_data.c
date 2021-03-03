@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 15:37:16 by flpinto           #+#    #+#             */
-/*   Updated: 2021/03/02 21:42:30 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/03 10:46:12 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,7 @@ t_info	ft_get_color(t_info info, char c)
 	info.tab = ft_split(info.buff + ++info.i, ',');
 	if (!info.tab[2] || !info.tab[1] || info.tab[3] ||
 	ft_check_tab(info.tab) == -1)
-	{
-		ft_free_tab(&info);
-		info.v = 0;
-		return (info);
-	}
+		return (ft_free_tab_c(info));
 	if (c == 'F')
 	{
 		info.vf++;
@@ -100,7 +96,8 @@ t_info	ft_get_res(t_info info)
 	info.i++;
 	info.vr++;
 	info.tab = ft_split(info.buff + info.i, ' ');
-	if (!info.tab[0] || !info.tab[1] || info.tab[2] || ft_check_tab(info.tab) == -1)
+	if (!info.tab[0] || !info.tab[1] || info.tab[2] ||
+	ft_check_tab(info.tab) == -1)
 	{
 		ft_free_tab(&info);
 		info.v = 0;
