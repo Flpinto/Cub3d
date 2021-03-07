@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 15:37:16 by flpinto           #+#    #+#             */
-/*   Updated: 2021/03/03 13:06:37 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/03 15:42:30 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,14 @@ t_info	ft_get_res(t_info info)
 	ft_check_tab(info.tab) == -1)
 	{
 		ft_free_tab(&info);
-		ft_putstr_fd("Error : Resolution Not Valid", 1);
+		ft_putstr_fd("Error : Resolution Not Valid\n", 1);
+		info.v = 0;
+		return (info);
+	}
+	if (ft_atoi(info.tab[0]) < 1 || ft_atoi(info.tab[1]) < 1)
+	{
+		ft_free_tab(&info);
+		ft_putstr_fd("Error : Resolution Can not be negative or null\n", 1);
 		info.v = 0;
 		return (info);
 	}

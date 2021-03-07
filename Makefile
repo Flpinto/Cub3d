@@ -1,13 +1,13 @@
 OS := $(shell uname)
 
-NAME = Cub3D
+NAME = cub3D
 
 LIBFT = ./libft/libft.a
 LIBFT_SRC := $(wildcard libft/*.c)
 LIBFT_OBJ := $(patsubst libft/%.c, libft/%.o, $(LIBFT_SRC))
 
 
-CC = gcc  -Wall -Wextra -Werror -g3 -fsanitize=address
+CC = gcc  -Wall -Wextra -Werror 
 MAKEFLAGS	+= --no-print-director
 
 

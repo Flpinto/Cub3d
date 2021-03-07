@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 18:28:56 by flpinto           #+#    #+#             */
-/*   Updated: 2021/03/03 10:58:03 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/07 12:17:51 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,14 @@ int			ft_check_inside_map(t_info *info)
 	int y;
 
 	y = 1;
+	info->nb_sprite = 0;
 	while (info->map[y] && y < info->maplen - 1)
 	{
 		x = 1;
 		while (info->map[y][x] && x < info->mapsize - 1)
 		{
+			if (info->map[y][x] == '2')
+				info->nb_sprite++;
 			if (info->map[y][x] == ' ' && ((info->map[y][x + 1] != '1' &&
 			info->map[y][x + 1] != ' ') && (info->map[y][x - 1] != '1' &&
 			info->map[y][x - 1] != ' ')))
@@ -104,7 +107,7 @@ int			ft_check_map(t_info *info)
 {
 	if (!info->map)
 	{
-		write(1, "Error parsing\n", 14);
+		ft_putstr_fd("Error : Map not valid\n", 1);
 		ft_end_pre(info);
 	}
 	if (ft_check_map_char(info) == -1)

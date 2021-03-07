@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 15:37:13 by flpinto           #+#    #+#             */
-/*   Updated: 2021/02/23 11:47:07 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/03 15:55:04 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_info	ft_get_map(t_info info, int fd)
 		info.map[info.i] = malloc(sizeof(char *) * info.mapsize * 2);
 		if (!info.map[info.i])
 		{
+			ft_putstr_fd("Error : Map invalid", 1);
 			info.v = 0;
 			return (info);
 		}

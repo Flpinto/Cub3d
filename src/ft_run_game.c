@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 17:02:35 by flpinto           #+#    #+#             */
-/*   Updated: 2021/03/03 10:45:05 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/07 11:34:50 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ void		ft_init_pos(t_all *all)
 	ft_init_sprite(all);
 }
 
+void		ft_window(t_all *all)
+{
+	all->game->win = mlx_new_window(all->game->mlx,
+	all->info->res_x, all->info->res_y, "Cub3d");
+	mlx_put_image_to_window(all->game->mlx,
+	all->game->win, all->img->img[0], 0, 0);
+}
+
 t_all		ft_run_game(t_all all, int argc, char *argv)
 {
 	t_game		game;
@@ -52,11 +60,9 @@ t_all		ft_run_game(t_all all, int argc, char *argv)
 	img.img[0] = mlx_new_image(all.game->mlx, all.info->res_x,
 	all.info->res_y);
 	img = ft_get_img_by_file(img, all);
-	ft_save(img.addr[0], &all, argc, argv);
 	ft_ray(&all);
-	game.win = mlx_new_window(game.mlx,
-		all.info->res_x, all.info->res_y, "Cub3d");
-	mlx_put_image_to_window(game.mlx, game.win, img.img[0], 0, 0);
+	ft_save(img.addr[0], &all, argc, argv);
+	ft_window(&all);
 	mlx_hook(all.game->win, 33, 1L << 17, (*ft_exit_game), &all);
 	mlx_hook(all.game->win, 2, 1L << 0, (*ft_keypress), &all);
 	mlx_hook(all.game->win, 3, 1L << 1, (*ft_keyrelease), &all);

@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:31:07 by flpinto           #+#    #+#             */
-/*   Updated: 2021/02/02 13:46:22 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/07 11:54:36 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,18 @@ int		main(int argc, char **argv)
 
 	if (argc == 1)
 	{
-		write(1, "no map\n", 7);
-		exit(0);
+		ft_putstr_fd("Error : No map", 1);
+		return (0);
+	}
+	if ((argc == 3 && ft_strncmp(argv[2], "--save", 6) != 0))
+	{
+		printf("Error : '%s' is not a valid argument.", argv[2]);
+		return (0);
+	}
+	if (argc > 3)
+	{
+		ft_putstr_fd("Too many arguments\n", 1);
+		return (0);
 	}
 	info = ft_parse_info((char *)argv[1], info);
 	all.info = &info;

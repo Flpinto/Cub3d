@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 15:21:45 by flpinto           #+#    #+#             */
-/*   Updated: 2021/03/03 12:35:13 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/07 11:52:46 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@
 # define RIGHT 100
 # define RRIGHT 65361
 # define RLEFT 65363
-# define SPRITE 625
-# define HSCREEN 1400
-# define WSCREEN 2570
+# define SPRITE 1024
+# define HSCREEN 2160
+# define WSCREEN 3840
 # define KEYMAX 75000
 
 typedef struct	s_indic
@@ -102,6 +102,8 @@ typedef struct	s_ray
 	int			vecty;
 	int			x;
 	int			y;
+	double		bufz[WSCREEN];
+	int			idx_sprite;
 }				t_ray;
 
 typedef struct	s_game
@@ -183,6 +185,7 @@ typedef struct	s_info
 	double		diry;
 	double		planex;
 	double		planey;
+	int			nb_sprite;
 	int			key[75000];
 }				t_info;
 

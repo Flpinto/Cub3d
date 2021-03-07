@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sprite.c                                        :+:      :+:    :+:   */
+/*   ft_sprite_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 16:59:33 by flpinto           #+#    #+#             */
-/*   Updated: 2021/03/03 11:27:39 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/07 11:38:56 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,15 @@ void	ft_stripe_loop(t_all *all, t_ray *ray, int i, int w)
 	int	d;
 
 	stripe = all->sprite->drawstx;
-	while (stripe < all->sprite->drawendx)
+	while (stripe <= all->sprite->drawendx)
 	{
-		ray->texx = (int)(256 * (stripe -
-			(-all->sprite->spwidth / 2 + all->sprite->spscx)) *
-			all->img->textw[5] / all->sprite->spwidth) / 256;
+		ray->texx = (int)(256 * (stripe - (-all->sprite->spwidth / 2 +
+		all->sprite->spscx)) * all->img->textw[5] / all->sprite->spwidth) / 256;
 		y = all->sprite->drawsty;
-		if (all->sprite->tformy[i] > 0 && stripe > 0 && stripe < w &&
+		if (all->sprite->tformy[i] >= 0 && stripe > 0 && stripe < w &&
 				all->sprite->tformy[i] < all->sprite->buffz[stripe])
-			while (y < all->sprite->drawendy)
+		{
+			while (y <= all->sprite->drawendy)
 			{
 				d = y * 256 -
 					all->info->res_y * 128 + all->sprite->spheight * 128;
@@ -84,6 +84,7 @@ void	ft_stripe_loop(t_all *all, t_ray *ray, int i, int w)
 				ft_print_sprite(all, ray, stripe, y);
 				y++;
 			}
+		}
 		stripe++;
 	}
 }
@@ -111,7 +112,7 @@ void	ft_sprite_calcul(t_all *all, t_ray *ray, int w, int h)
 			all->sprite->drawstx = 0;
 		all->sprite->drawendx = all->sprite->spwidth / 2 + all->sprite->spscx;
 		if (all->sprite->drawendx >= w)
-			all->sprite->drawendx = w - 1;
+			all->sprite->drawendx = w;
 		ft_stripe_loop(all, ray, nbsp, w);
 	}
 	ft_init_sprite(all);

@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 11:45:50 by flpinto           #+#    #+#             */
-/*   Updated: 2021/03/02 21:25:06 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/06 16:48:44 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ int		ft_cw(t_all *all, double y, double x)
 		i++;
 	if ((int)x < all->info->mapsize - 1 && (int)x > 0)
 		i++;
+	if (all->info->map[(int)y][(int)x] != '1')
+		i = 2;
+	else
+		i = 0;
 	return (i);
 }
 

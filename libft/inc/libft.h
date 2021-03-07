@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 10:56:48 by flpinto           #+#    #+#             */
-/*   Updated: 2019/10/24 11:44:29 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/06 10:46:50 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int				ft_isprint(int c);
 int				ft_strlen(const char *s);
 int				ft_tolower(int c);
 int				ft_toupper(int c);
+void			ft_swap(void *a, void *b);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);

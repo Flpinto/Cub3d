@@ -6,7 +6,7 @@
 /*   By: flpinto <flpinto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/06 10:55:58 by flpinto           #+#    #+#             */
-/*   Updated: 2021/03/03 13:02:38 by flpinto          ###   ########.fr       */
+/*   Updated: 2021/03/03 15:41:39 by flpinto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ t_info		ft_parse(int fd, t_info info, char *filemap)
 	}
 	if (info.v == 0)
 	{
+		ft_putstr_fd("Error : Parsing Not Valid\n", 1);
 		ft_destroy_info(&info);
 		close(fd);
 		exit(0);
